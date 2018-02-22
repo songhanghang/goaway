@@ -24,22 +24,6 @@ public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
     private long mUsedTime;
     private long mStartTime;
-    private AwayEngine mAwayEngine;
-
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (Intent.ACTION_SCREEN_ON.equals(action)) {
-                mUsedTime = TimeUtil.getTodayUsedTime(context);
-                mStartTime = System.currentTimeMillis();
-                mAwayEngine.doDraw();
-            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
-                TimeUtil.setTodayUsedTime(context, calcNewUsedTime());
-            }
-        }
-    };
 
     private long calcNewUsedTime() {
         long endTime = System.currentTimeMillis();
@@ -54,30 +38,42 @@ public class GoAwayWallpaperService extends WallpaperService {
     @Override
     public void onCreate() {
         super.onCreate();
-        mUsedTime = TimeUtil.getTodayUsedTime(GoAwayWallpaperService.this);
-        mStartTime = System.currentTimeMillis();
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        registerReceiver(mReceiver, filter);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
     }
 
     @Override
     public Engine onCreateEngine() {
-        return mAwayEngine = new AwayEngine();
+        return new AwayEngine();
     }
 
     private class AwayEngine extends Engine {
         private Paint textPaint;
         private float height, width;
         private float bottom = 24; // 距离底部
+
+
+        private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                    mUsedTime = TimeUtil.getTodayUsedTime(context);
+                    mStartTime = System.currentTimeMillis();
+                    doDraw();
+                    Log.i(TAG, "屏幕点亮");
+                } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+                    TimeUtil.setTodayUsedTime(context, calcNewUsedTime());
+                    Log.i(TAG, "屏幕关闭");
+
+                }
+            }
+        };
+
         @Override
         public void onCreate(SurfaceHolder surfaceHolder) {
             super.onCreate(surfaceHolder);
@@ -92,6 +88,14 @@ public class GoAwayWallpaperService extends WallpaperService {
             textPaint.setTextAlign(Paint.Align.CENTER);
             textPaint.setAntiAlias(true);
             textPaint.setDither(true);
+
+            mUsedTime = TimeUtil.getTodayUsedTime(GoAwayWallpaperService.this);
+            mStartTime = System.currentTimeMillis();
+
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
+            registerReceiver(mReceiver, filter);
         }
 
         @Override
@@ -104,22 +108,35 @@ public class GoAwayWallpaperService extends WallpaperService {
             }
         }
 
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            unregisterReceiver(mReceiver);
+        }
+
         private void doDraw() {
-            SurfaceHolder surfaceHolder = getSurfaceHolder();
-            if (surfaceHolder == null) {
-                return;
-            }
+            try {
+                SurfaceHolder surfaceHolder = getSurfaceHolder();
+                if (surfaceHolder == null) {
+                    return;
+                }
 
-            Canvas canvas = surfaceHolder.lockCanvas();
-            if (canvas == null) {
-                return;
-            }
+                Canvas canvas = surfaceHolder.lockCanvas();
+                if (canvas == null) {
+                    return;
+                }
 
-            canvas.drawColor(Color.BLUE);
-            String useStr = isChineseLanguage() ? "已使用: " : "used: ";
-            String content = useStr + TimeUtil.timeToString(calcNewUsedTime());
-            canvas.drawText(content, width / 2, height - bottom, textPaint);
-            surfaceHolder.unlockCanvasAndPost(canvas);
+                long usedTime = calcNewUsedTime();
+                canvas.drawColor(TimeUtil.getColor(usedTime));
+                String useStr = isChineseLanguage() ? "已使用: " : "used: ";
+                String timeStr = TimeUtil.timeToString(usedTime);
+                String tips = TimeUtil.getTips(usedTime);
+                String content = useStr + timeStr + " | " + tips;
+                canvas.drawText(content, width / 2, height - bottom, textPaint);
+                surfaceHolder.unlockCanvasAndPost(canvas);
+            } catch (Exception | OutOfMemoryError e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -129,7 +146,7 @@ public class GoAwayWallpaperService extends WallpaperService {
 
     }
 
-    public static boolean isChineseLanguage(){
-        return TextUtils.equals(Locale.getDefault().getLanguage(),Locale.CHINA.getLanguage());
+    public static boolean isChineseLanguage() {
+        return TextUtils.equals(Locale.getDefault().getLanguage(), Locale.CHINA.getLanguage());
     }
 }

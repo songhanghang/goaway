@@ -1,7 +1,9 @@
 package com.mi.song.goaway;
 
+import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 
 
@@ -20,7 +22,7 @@ public class TimeUtil {
     private static final int SECONDS_IN_DAY = 60 * 60 * 24;
     private static final long MILLIS_IN_DAY = 1000L * SECONDS_IN_DAY;
     private static final String PREFERENCE_NAME = "time";
-
+    private static final ArgbEvaluator sArgbEvaluator = new ArgbEvaluator();
     private static final SimpleDateFormat sSimpleDateFormat = new SimpleDateFormat("yyyy_MM_dd");
 
     public static long getTodayUsedTime(Context context) {
@@ -55,11 +57,45 @@ public class TimeUtil {
     }
 
     public static long getZeroTime(long time) {
-        long zero = time/(1000*3600*24)*(1000*3600*24) - TimeZone.getDefault().getRawOffset();
+        long zero = time / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();
         return zero;
     }
 
-    public static  boolean isSameDay(long time1, long time2) {
+    public static boolean isSameDay(long time1, long time2) {
         return getZeroTime(time1) == getZeroTime(time2);
+    }
+
+    public static int getColor(long time) {
+        float h = 3600000f;
+
+        int blue = 0XFF4A7FEB;
+        int green = 0XFF46BF7F;
+        int orange = 0XFFFF8746;
+        int red = 0XFFFF6243;
+
+        int color = Color.RED;
+        if (time < h) {
+            color = (Integer) sArgbEvaluator.evaluate(time / h, blue, green);
+        } else if (time < 2 * h) {
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 1, green, orange);
+        } else if (time < 3 * h) {
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 2, orange, red);
+        } else if (time < 4 * h) {
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 3, red, Color.RED);
+        }
+        return color;
+    }
+
+    public static String getTips(long time) {
+        float h = 3600000f;
+        String tips = "赠你一天血红!";
+        if (time < h) {
+            tips = "小撸怡情";
+        } else if (time < 2 * h) {
+            tips = "大撸伤身";
+        } else if (time < 3 * h) {
+            tips = "强撸灰飞烟灭";
+        }
+        return tips;
     }
 }
