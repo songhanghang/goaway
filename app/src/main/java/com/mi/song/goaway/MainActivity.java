@@ -21,6 +21,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.baidu.mobstat.StatService;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatService.start(this);
 
         WebView webView = findViewById(R.id.webview);
         webView.loadUrl("https://github.com/songhanghang/goaway/blob/master/README.md");
