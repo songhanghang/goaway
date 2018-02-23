@@ -5,7 +5,7 @@
 2. miui为省电优化，后台默认会冻结一些能力，所以需要手动打开，`进入 设置->电量和性能->省电优化->应用智能省电->远离手机（该app）->点击进入后台配置->无限制 ` （该app功能简单，刷新频率低，不会耗电，欢迎监督）
 
 # 开源声明
-[github: ](https://github.com/songhanghang/goaway)
+[github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)
 
 该app无任何恶意行为，代码在此开源，欢迎监督。
 如有二次开发，望加上出处，不胜感谢！
@@ -45,5 +45,9 @@
  
  用的越久越血红...
  
-
-
+# 联系方式
+ 
+[我的博客： songhang.club](http://songhang.club)
+邮箱: 1131442853@qq.com
+[github: https://github.com/songhanghang](https://github.com/songhanghang)
+ 
