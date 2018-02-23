@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         WebView webView = findViewById(R.id.webview);
-        webView.loadUrl("https://github.com/songhanghang/study_note/blob/master/%E8%BF%9C%E7%A6%BB%E6%89%8B%E6%9C%BA.md");
+        webView.loadUrl("https://github.com/songhanghang/goaway/blob/master/README.md");
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
