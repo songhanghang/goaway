@@ -64,7 +64,6 @@ public class TimeUtil {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         return calendar.getTimeInMillis();
-
     }
 
     public static boolean isSameDay(long time1, long time2) {
