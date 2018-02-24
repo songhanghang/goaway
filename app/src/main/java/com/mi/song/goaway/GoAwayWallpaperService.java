@@ -15,7 +15,7 @@ import android.view.SurfaceHolder;
 import java.util.Locale;
 
 /**
- * @author by songhang on 2018/2/21 Email: songhang@xiaomi.com
+ * @author by songhang on 2018/2/21
  */
 
 public class GoAwayWallpaperService extends WallpaperService {

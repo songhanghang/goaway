@@ -14,7 +14,7 @@ import java.util.TimeZone;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * @author by songhang on 2018/2/21 Email: songhang@xiaomi.com
+ * @author by songhang on 2018/2/21
  */
 
 public class TimeUtil {
