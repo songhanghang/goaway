@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +17,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -25,9 +28,11 @@ import com.baidu.mobstat.StatService;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 2323;
+    public static int HEIGHT, WIGHT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StatService.start(this);
 
+        // show README
         WebView webView = findViewById(R.id.webview);
         webView.loadUrl("https://github.com/songhanghang/goaway/blob/master/README.md");
         webView.setWebViewClient(new WebViewClient() {
@@ -44,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
+
+        // get screen real height and width
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        @SuppressWarnings("rawtypes")
+        Class c;
+        try {
+            c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            HEIGHT = dm.heightPixels;
+            WIGHT = dm.widthPixels;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -123,4 +145,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "未安装支付宝客户端", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

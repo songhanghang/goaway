@@ -2,12 +2,17 @@
 
 # 下载
 
-[点这Download](https://pan.baidu.com/s/1kWNpMEr)
+[点这Download](https://pan.baidu.com/s/1htn4hl6)
 
 # 注意事项
  
 1. 适配用的是miui，其他手机欢迎反馈...
 2. miui为省电优化，后台默认会冻结一些能力，所以需要手动打开，`进入 设置->电量和性能->省电优化->应用智能省电->远离手机（该app）->点击进入后台配置->无限制 ` （该app功能简单，刷新频率低，不会耗电，欢迎监督）
+
+# 更新说明
+
+ 1, 适配小米全面屏手机
+ 2, 适配虚拟键手机
 
 # 开源声明
 [github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)

@@ -12,8 +12,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.view.WindowManager;
-
 import java.util.Locale;
 
 /**
@@ -52,7 +50,6 @@ public class GoAwayWallpaperService extends WallpaperService {
 
     private class AwayEngine extends Engine {
         private Paint textPaint;
-        private float height, width;
         private float bottom = 24; // 距离底部
 
 
@@ -77,10 +74,6 @@ public class GoAwayWallpaperService extends WallpaperService {
         @Override
         public void onCreate(SurfaceHolder surfaceHolder) {
             super.onCreate(surfaceHolder);
-            WindowManager wm = (WindowManager) getApplicationContext()
-                    .getSystemService(Context.WINDOW_SERVICE);
-            height = wm.getDefaultDisplay().getHeight();
-            width = wm.getDefaultDisplay().getWidth();
 
             textPaint = new Paint();
             textPaint.setColor(Color.WHITE);
@@ -132,7 +125,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                 String timeStr = TimeUtil.timeToString(usedTime);
                 String tips = TimeUtil.getTips(usedTime);
                 String content = useStr + timeStr + " | " + tips;
-                canvas.drawText(content, width / 2, height - bottom, textPaint);
+                canvas.drawText(content, MainActivity.WIGHT / 2, MainActivity.HEIGHT - bottom, textPaint);
                 surfaceHolder.unlockCanvasAndPost(canvas);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
