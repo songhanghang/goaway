@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.didikee.donate.AlipayDonate;
 import android.didikee.donate.WeiXinDonate;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -39,33 +41,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StatService.start(this);
-
-        // show README
-        WebView webView = findViewById(R.id.webview);
-        webView.loadUrl("https://github.com/songhanghang/goaway/blob/master/README.md");
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return super.shouldOverrideUrlLoading(view, url);
-            }
-        });
-
         // get screen real height and width
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics dm = new DisplayMetrics();
-        @SuppressWarnings("rawtypes")
-        Class c;
-        try {
-            c = Class.forName("android.view.Display");
-            @SuppressWarnings("unchecked")
-            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
-            method.invoke(display, dm);
-            HEIGHT = dm.heightPixels;
-            WIGHT = dm.widthPixels;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        calcScreenParams();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ((ViewGroup) getWindow().getDecorView()).removeAllViews();
     }
 
     @Override
@@ -109,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    public void look(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/songhanghang/goaway/blob/master/README.md"));
+        startActivity(intent);
+    }
+
     private void wechatPay() {
         //检测微信是否安装
         if (!WeiXinDonate.hasInstalledWeiXinClient(this)) {
@@ -143,6 +131,23 @@ public class MainActivity extends AppCompatActivity {
             AlipayDonate.startAlipayClient(this, "FKX08327O1EEEDGRVIWIFB");
         } else {
             Toast.makeText(this, "未安装支付宝客户端", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void calcScreenParams() {
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        @SuppressWarnings("rawtypes")
+        Class c;
+        try {
+            c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            HEIGHT = dm.heightPixels;
+            WIGHT = dm.widthPixels;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
