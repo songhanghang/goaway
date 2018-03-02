@@ -108,17 +108,17 @@ public class GoAwayWallpaperService extends WallpaperService {
         }
 
         private void doDraw() {
-            try {
-                SurfaceHolder surfaceHolder = getSurfaceHolder();
-                if (surfaceHolder == null) {
-                    return;
-                }
+            SurfaceHolder surfaceHolder = getSurfaceHolder();
+            if (surfaceHolder == null) {
+                return;
+            }
 
-                Canvas canvas = surfaceHolder.lockCanvas();
+            Canvas canvas = null;
+            try {
+                canvas = surfaceHolder.lockCanvas();
                 if (canvas == null) {
                     return;
                 }
-
                 long usedTime = calcNewUsedTime();
                 canvas.drawColor(TimeUtil.getColor(usedTime));
                 String useStr = isChineseLanguage() ? "已使用: " : "used: ";
@@ -126,9 +126,12 @@ public class GoAwayWallpaperService extends WallpaperService {
                 String tips = TimeUtil.getTips(usedTime);
                 String content = useStr + timeStr + " | " + tips;
                 canvas.drawText(content, MainActivity.WIGHT / 2, MainActivity.HEIGHT - bottom, textPaint);
-                surfaceHolder.unlockCanvasAndPost(canvas);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
+            } finally {
+                if (canvas != null) {
+                    surfaceHolder.unlockCanvasAndPost(canvas);
+                }
             }
         }
 
