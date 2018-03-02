@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,36 +17,32 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
 
 import java.io.File;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE = 2323;
-    public static int HEIGHT, WIGHT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // statistics
         StatService.start(this);
         // get screen real height and width
-        calcScreenParams();
+        ScreenUtil.calcScreenParams(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // for miui，miui dev version will leak activity，miui internal is processing fix，Emmmmmm...
         ((ViewGroup) getWindow().getDecorView()).removeAllViews();
     }
 
@@ -131,23 +126,6 @@ public class MainActivity extends AppCompatActivity {
             AlipayDonate.startAlipayClient(this, "FKX08327O1EEEDGRVIWIFB");
         } else {
             Toast.makeText(this, "未安装支付宝客户端", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void calcScreenParams() {
-        Display display = getWindowManager().getDefaultDisplay();
-        DisplayMetrics dm = new DisplayMetrics();
-        @SuppressWarnings("rawtypes")
-        Class c;
-        try {
-            c = Class.forName("android.view.Display");
-            @SuppressWarnings("unchecked")
-            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
-            method.invoke(display, dm);
-            HEIGHT = dm.heightPixels;
-            WIGHT = dm.widthPixels;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

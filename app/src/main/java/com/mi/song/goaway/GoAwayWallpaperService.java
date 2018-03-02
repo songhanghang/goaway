@@ -20,6 +20,9 @@ import java.util.Locale;
 
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
+    private static final int HEIGHT = ScreenUtil.getHeight();
+    private static final int WIDTH = ScreenUtil.getWidth();
+
     private long mUsedTime;
     private long mStartTime;
 
@@ -96,8 +99,6 @@ public class GoAwayWallpaperService extends WallpaperService {
             super.onVisibilityChanged(visible);
             if (visible) {
                 doDraw();
-            } else {
-
             }
         }
 
@@ -125,7 +126,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                 String timeStr = TimeUtil.timeToString(usedTime);
                 String tips = TimeUtil.getTips(usedTime);
                 String content = useStr + timeStr + " | " + tips;
-                canvas.drawText(content, MainActivity.WIGHT / 2, MainActivity.HEIGHT - bottom, textPaint);
+                canvas.drawText(content, WIDTH / 2, HEIGHT - bottom, textPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
             } finally {
