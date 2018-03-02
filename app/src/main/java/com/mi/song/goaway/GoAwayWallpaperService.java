@@ -23,7 +23,9 @@ public class GoAwayWallpaperService extends WallpaperService {
     private static final int HEIGHT = ScreenUtil.getHeight();
     private static final int WIDTH = ScreenUtil.getWidth();
 
+    //The time you used phone
     private long mUsedTime;
+    //The time when the screen on
     private long mStartTime;
 
     private long calcNewUsedTime() {
@@ -53,6 +55,7 @@ public class GoAwayWallpaperService extends WallpaperService {
 
     private class AwayEngine extends Engine {
         private Paint textPaint;
+        //todo set pos in setting
         private float bottom = 24; // 距离底部
 
 
@@ -61,13 +64,17 @@ public class GoAwayWallpaperService extends WallpaperService {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
+
                 if (Intent.ACTION_SCREEN_ON.equals(action)) {
+                    //do draw on screen on
                     mUsedTime = TimeUtil.getTodayUsedTime(context);
                     mStartTime = System.currentTimeMillis();
                     doDraw();
                     Log.i(TAG, "屏幕点亮");
                 } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
+                    //set used time when screen off
                     TimeUtil.setTodayUsedTime(context, calcNewUsedTime());
+                    Log.d(TAG, "onReceive: " + TimeUtil.timeToString(calcNewUsedTime()));
                     Log.i(TAG, "屏幕关闭");
 
                 }
@@ -122,10 +129,12 @@ public class GoAwayWallpaperService extends WallpaperService {
                 }
                 long usedTime = calcNewUsedTime();
                 canvas.drawColor(TimeUtil.getColor(usedTime));
-                String useStr = isChineseLanguage() ? "已使用: " : "used: ";
+                //String useStr = isChineseLanguage() ? "已使用: " : "used: ";
+                String useStr = getString(R.string.used_hint);
                 String timeStr = TimeUtil.timeToString(usedTime);
-                String tips = TimeUtil.getTips(usedTime);
-                String content = useStr + timeStr + " | " + tips;
+                String tips = TimeUtil.getTips(usedTime, GoAwayWallpaperService.this);
+                //String content = useStr + timeStr + " | " + tips;
+                String content = String.format("%s %s | %s", useStr, timeStr, tips);
                 canvas.drawText(content, WIDTH / 2, HEIGHT - bottom, textPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
@@ -140,10 +149,9 @@ public class GoAwayWallpaperService extends WallpaperService {
         public void onTouchEvent(MotionEvent event) {
             super.onTouchEvent(event);
         }
-
     }
 
-    public static boolean isChineseLanguage() {
-        return TextUtils.equals(Locale.getDefault().getLanguage(), Locale.CHINA.getLanguage());
-    }
+    //public static boolean isChineseLanguage() {
+    //    return TextUtils.equals(Locale.getDefault().getLanguage(), Locale.CHINA.getLanguage());
+    //}
 }
