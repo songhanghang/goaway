@@ -4,11 +4,13 @@ import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -23,8 +25,13 @@ public class TimeUtil {
     private static final long MILLIS_IN_DAY = 1000L * SECONDS_IN_DAY;
     private static final String PREFERENCE_NAME = "time";
     private static final ArgbEvaluator sArgbEvaluator = new ArgbEvaluator();
-    private static final SimpleDateFormat sSimpleDateFormat = new SimpleDateFormat("yyyy_MM_dd");
+    private static final SimpleDateFormat sSimpleDateFormat = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault());
 
+    /**
+     * Save used time in sharedPreferences
+     * @param context the context
+     * @return  used time
+     */
     public static long getTodayUsedTime(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
         Date date = new Date(System.currentTimeMillis());
@@ -73,6 +80,7 @@ public class TimeUtil {
     public static int getColor(long time) {
         float h = 3600000f;
 
+        //todo set custom color
         int blue = 0XFF4A7FEB;
         int green = 0XFF46BF7F;
         int orange = 0XFFFF8746;
@@ -91,15 +99,17 @@ public class TimeUtil {
         return color;
     }
 
-    public static String getTips(long time) {
-        float h = 3600000f;
-        String tips = "赠你一天血红!";
+    public static String getTips(long time, Context context) {
+        //todo set use phone time in setting, default 3h
+        float h = 3600000f; //1h
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String tips = sp.getString(SettingFragment.PRE_KEY_TIP3, context.getString(R.string.tip3)); //when time > 3h
         if (time < h) {
-            tips = "小撸怡情";
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP0, context.getString(R.string.tip0));
         } else if (time < 2 * h) {
-            tips = "大撸伤身";
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP1, context.getString(R.string.tip1));
         } else if (time < 3 * h) {
-            tips = "强撸灰飞烟灭";
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip3));
         }
         return tips;
     }
