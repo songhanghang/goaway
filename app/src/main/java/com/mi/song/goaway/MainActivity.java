@@ -11,14 +11,18 @@ import android.didikee.donate.AlipayDonate;
 import android.didikee.donate.WeiXinDonate;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ActionMenuView;
 import android.widget.Toast;
 
 import com.baidu.mobstat.StatService;
@@ -27,7 +31,16 @@ import java.io.File;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
+    private String TAG = "MainActivity";
     public static final int REQUEST_CODE = 2323;
+    public static final int MAIN = 0;
+    public static final int SETTING = 1;
+
+    private MainFragment mainFragment;
+    private SettingFragment settingFragment;
+    private int nowFragment = MAIN;
+
+    private MenuItem settingItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         StatService.start(this);
         // get screen real height and width
         ScreenUtil.calcScreenParams(this);
+        switchFragment(MAIN);
     }
 
     @Override
@@ -56,6 +70,62 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "授权失败", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        settingItem = menu.findItem(R.id.menu_setting);
+        settingItem.setVisible(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_setting:
+                switchFragment(SETTING);
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.d(TAG, "onBackPressed: ");
+        if (nowFragment == SETTING) {
+            Log.d(TAG, "onBackPressed: true");
+            settingItem.setVisible(true);
+            nowFragment = MAIN;
+        }
+    }
+
+    private void switchFragment(int key) {
+        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+        if (key == MAIN) {
+            if (mainFragment == null) {
+                mainFragment = new MainFragment();
+            }
+
+            if (settingItem != null) {
+                settingItem.setVisible(true);
+            }
+            transaction.replace(R.id.main_container, mainFragment);
+            nowFragment = MAIN;
+        } else if (key == SETTING) {
+            if (settingFragment == null) {
+                settingFragment = new SettingFragment();
+            }
+            settingItem.setVisible(false);
+            transaction.replace(R.id.main_container, settingFragment);
+            nowFragment = SETTING;
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 
     public void use(View view) {
