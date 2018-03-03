@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // statistics
         StatService.start(this);
-        // get screen real height and width
-        ScreenUtil.calcScreenParams(this);
     }
 
     @Override

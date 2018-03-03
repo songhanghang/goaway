@@ -1,8 +1,11 @@
 package com.mi.song.goaway;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
@@ -14,40 +17,28 @@ public class ScreenUtil {
     private volatile static int sHeight;
     private volatile static int sWidth;
 
-    public static int getHeight() {
+    public static int getHeight(Context context) {
         if (sHeight > 0) {
             return sHeight;
-        } else {
-            throw new IllegalStateException("must call calcScreenParams in activity before");
         }
+        calcRealScreenSize(context);
+        return sHeight;
     }
 
-    public static int getWidth() {
+    public static int getWidth(Context context) {
         if (sWidth > 0) {
             return sWidth;
-        } else {
-            throw new IllegalStateException("must call calcScreenParams in activity before");
         }
+        calcRealScreenSize(context);
+        return sWidth;
     }
 
-    /**
-     * must call before
-     * @param activity activity
-     */
-    public static void calcScreenParams(Activity activity) {
-        Display display = activity.getWindowManager().getDefaultDisplay();
+    private static void calcRealScreenSize(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
         DisplayMetrics dm = new DisplayMetrics();
-        @SuppressWarnings("rawtypes")
-        Class c;
-        try {
-            c = Class.forName("android.view.Display");
-            @SuppressWarnings("unchecked")
-            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
-            method.invoke(display, dm);
-            sHeight = dm.heightPixels;
-            sWidth = dm.widthPixels;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        display.getRealMetrics(dm);
+        sWidth = dm.widthPixels;
+        sHeight = dm.heightPixels;
     }
 }

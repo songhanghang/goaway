@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+
 import java.util.Locale;
 
 /**
@@ -20,11 +21,11 @@ import java.util.Locale;
 
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
-    private static final int HEIGHT = ScreenUtil.getHeight();
-    private static final int WIDTH = ScreenUtil.getWidth();
 
     private long mUsedTime;
     private long mStartTime;
+    private int mHeight;
+    private int mWidth;
 
     private long calcNewUsedTime() {
         long endTime = System.currentTimeMillis();
@@ -39,6 +40,8 @@ public class GoAwayWallpaperService extends WallpaperService {
     @Override
     public void onCreate() {
         super.onCreate();
+        mHeight = ScreenUtil.getHeight(this);
+        mWidth = ScreenUtil.getWidth(this);
     }
 
     @Override
@@ -126,12 +129,16 @@ public class GoAwayWallpaperService extends WallpaperService {
                 String timeStr = TimeUtil.timeToString(usedTime);
                 String tips = TimeUtil.getTips(usedTime);
                 String content = useStr + timeStr + " | " + tips;
-                canvas.drawText(content, WIDTH / 2, HEIGHT - bottom, textPaint);
+                canvas.drawText(content, mWidth / 2, mHeight - bottom, textPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
             } finally {
                 if (canvas != null) {
-                    surfaceHolder.unlockCanvasAndPost(canvas);
+                    try {
+                        surfaceHolder.unlockCanvasAndPost(canvas);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
