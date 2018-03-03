@@ -5,4 +5,9 @@
     <string name="used_hint">已使用</string>
     <string name="tips_title">提示</string>
     <string name="bottom_distance_title">底部距离</string>
+    <string name="tip1_title">提示1</string>
+    <string name="tip2_title">提示2</string>
+    <string name="tip3_title">提示3</string>
+    <string name="tip4_title">提示4</string>
+    <string name="bottom_summary_format">有效范围: 0~%d, 当前值: %d</string>
 </resources>

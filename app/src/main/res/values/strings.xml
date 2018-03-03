@@ -6,16 +6,21 @@
 
     <string name="used_hint">Used</string>
 
-    <string name="tips_title">Tips</string>
+
     <string name="bottom_distance_title">Bottom distance</string>
     <string name="bottom_distance">24</string>
 
+    <string name="tips_title">Tips</string>
+    <string name="tip1_title">Tip1</string>
+    <string name="tip2_title">Tip2</string>
+    <string name="tip3_title">Tip3</string>
+    <string name="tip4_title">Tip4</string>
     <string name="tip0">小撸怡情</string>
     <string name="tip1">大撸伤身</string>
     <string name="tip2">强撸灰飞烟灭</string>
     <string name="tip3">赠你一天血红!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_setting">Setting</string>
+    <string name="bottom_summary_format">Range: 0~%d, now: %d</string>
+
 </resources>
