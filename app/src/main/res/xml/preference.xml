@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <PreferenceCategory
+        android:title="Tips">
+
+        <EditTextPreference
+            android:title="Tip1"
+            android:key="pre_key_tip0"
+            android:summary="@string/tip0"
+            android:defaultValue="@string/tip0"/>
+
+        <EditTextPreference
+            android:title="Tip2"
+            android:key="pre_key_tip1"
+            android:summary="@string/tip1"
+            android:defaultValue="@string/tip1"/>
+
+        <EditTextPreference
+            android:title="Tip3"
+            android:key="pre_key_tip2"
+            android:summary="@string/tip2"
+            android:defaultValue="@string/tip2"/>
+
+        <EditTextPreference
+            android:title="Tip4"
+            android:key="pre_key_tip4"
+            android:summary="@string/tip3"
+            android:defaultValue="@string/tip3"/>
+
+    </PreferenceCategory>
+
+
+    <!--<PreferenceCategory
+        android:title="Colors">
+
+        <ColorPickerPreference
+            android:defaultValue="#88C440"
+            android:dialogTitle="@string/color_picker_default_title"
+            android:key="pref_color"
+            android:persistent="false"
+            android:summary="Very nice color"
+            android:title="ColorPickerPreference"
+            app:pref_size="small" />
+
+    </PreferenceCategory>-->
+
+</PreferenceScreen>
