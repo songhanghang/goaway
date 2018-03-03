@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.mi.song.goaway.MainActivity">
+    android:layout_height="match_parent" >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:backgroundTint="@color/colorPrimary"
-        android:onClick="use"
-        android:text="用"
-        android:textColor="@android:color/white"
-        android:textSize="48dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/colorAccent"
-        android:onClick="pay"
-        android:text="赏"
-        android:textColor="@android:color/white"
-        android:textSize="48dp" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:onClick="look"
-        android:gravity="left"
-        android:backgroundTint="@android:color/white"
-        android:textColor="@color/colorAccent"
-        android:text="注意：miui为省电优化，后台默认会冻结应用，需要手动开启无限制，进入 设置->电量和性能->省电优化->应用智能省电->goaway（该app）->点击进入后台配置->无限制 \n该app功能简单，刷新频率低，不会耗电，已经开源，欢迎监督\n\n--点击查看详情--"/>
-
-</LinearLayout>
+</FrameLayout>
