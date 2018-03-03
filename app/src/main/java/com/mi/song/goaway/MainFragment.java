@@ -20,11 +20,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -38,7 +34,6 @@ import java.io.InputStream;
  */
 public class MainFragment extends Fragment implements View.OnClickListener {
     private static final int REQUEST_CODE = 2323;
-    private MenuItem mMenuItem;
 
     public MainFragment() {
         // Required empty public constructor
@@ -47,7 +42,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
@@ -57,31 +51,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.use_btn).setOnClickListener(this);
         view.findViewById(R.id.pay_btn).setOnClickListener(this);
         view.findViewById(R.id.note_btn).setOnClickListener(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        setHasOptionsMenu(true);
-        if (mMenuItem != null)
-            mMenuItem.setVisible(true);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        if (activity != null) {
-            activity.setTitle(getString(R.string.app_name));
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMenuItem.setVisible(false);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        mMenuItem = menu.findItem(R.id.menu_setting);
     }
 
     @Override
@@ -118,7 +87,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             Intent intent = new Intent();
             intent.setAction(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
             intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT
-                    , new ComponentName(getActivity().getApplicationContext().getPackageName()
+                    , new ComponentName(getActivity().getPackageName()
                             , GoAwayWallpaperService.class.getCanonicalName()));
 
             startActivity(intent);

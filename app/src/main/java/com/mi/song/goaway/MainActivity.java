@@ -11,6 +11,8 @@ import com.baidu.mobstat.StatService;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MenuItem mMenuItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,17 +25,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        return false;
+        mMenuItem = menu.findItem(R.id.menu_setting);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case android.R.id.home: // Go back MainFragment
                 onBackPressed();
+
+                mMenuItem.setVisible(true);
+                setTitle(R.string.app_name);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 break;
-            case R.id.menu_setting:
+            case R.id.menu_setting: // Go SettingFragment
                 startFragment(new SettingFragment(), true);
+
+                mMenuItem.setVisible(false);
+                setTitle(R.string.menu_setting);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 break;
             default:
                 break;

@@ -130,7 +130,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                 String timeStr = TimeUtil.timeToString(usedTime);
 
                 String tips = TimeUtil.getTips(usedTime, GoAwayWallpaperService.this);
-                String content = useStr + timeStr + " | " + tips;
+                String content = useStr + ": " + timeStr + " | " + tips;
                 canvas.drawText(content, mWidth / 2, mHeight - bottom, textPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
