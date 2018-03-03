@@ -11,9 +11,9 @@
 
 # 更新说明
 
- 1, 适配小米全面屏手机
- 2, 适配虚拟键手机
- 3, fix 重启手机无法显示时间提示
+ 1. 适配小米全面屏手机
+ 2. 适配虚拟键手机
+ 3. fix 重启手机无法显示时间提示
 
 # 开源声明
 [github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)
