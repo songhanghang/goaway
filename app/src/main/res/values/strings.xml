@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">goaway</string>
+    <string name="button_text">Use</string>
+    <string name="button_text_help" translatable="false"><![CDATA[注意：miui为省电优化，后台默认会冻结应用，需要手动开启无限制，进入 设置->电量和性能->省电优化->应用智能省电->goaway（该app）->点击进入后台配置->无限制  该app功能简单，刷新频率低，不会耗电，已经开源，欢迎监督  --点击查看详情--]]></string>
+    <string name="button_text_donate">Donate</string>
+
+    <string name="used_hint">Used</string>
+    <string name="tip0">小撸怡情</string>
+    <string name="tip1">大撸伤身</string>
+    <string name="tip2">强撸灰飞烟灭</string>
+    <string name="tip3">赠你一天血红!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_setting">Setting</string>
 </resources>
