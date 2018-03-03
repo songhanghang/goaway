@@ -26,7 +26,7 @@
 
         <EditTextPreference
             android:title="Tip4"
-            android:key="pre_key_tip4"
+            android:key="pre_key_tip3"
             android:summary="@string/tip3"
             android:defaultValue="@string/tip3"/>
 

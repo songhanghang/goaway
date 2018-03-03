@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 
 import java.text.SimpleDateFormat;
@@ -107,7 +108,7 @@ public class TimeUtil {
         } else if (time < 2 * h) {
             tips = sp.getString(SettingFragment.PRE_KEY_TIP1, context.getString(R.string.tip1));
         } else if (time < 3 * h) {
-            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip3));
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip2));
         }
         return tips;
     }
