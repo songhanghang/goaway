@@ -19,8 +19,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class TimeUtil {
 
-    private static final int SECONDS_IN_DAY = 60 * 60 * 24;
-    private static final long MILLIS_IN_DAY = 1000L * SECONDS_IN_DAY;
     private static final String PREFERENCE_NAME = "time";
     private static final ArgbEvaluator sArgbEvaluator = new ArgbEvaluator();
     private static final SimpleDateFormat sSimpleDateFormat = new SimpleDateFormat("yyyy_MM_dd");
@@ -93,13 +91,15 @@ public class TimeUtil {
 
     public static String getTips(long time) {
         float h = 3600000f;
-        String tips = "赠你一天血红!";
+        String tips = "自暴自弃...";
         if (time < h) {
-            tips = "小撸怡情";
+            tips = "怡情";
         } else if (time < 2 * h) {
-            tips = "大撸伤身";
+            tips = "适度";
         } else if (time < 3 * h) {
-            tips = "强撸灰飞烟灭";
+            tips = "伤身";
+        } else if (time < 4 * h) {
+            tips = "收手!goaway!";
         }
         return tips;
     }
