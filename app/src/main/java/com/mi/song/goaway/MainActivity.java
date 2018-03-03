@@ -12,6 +12,7 @@ import com.baidu.mobstat.StatService;
 public class MainActivity extends AppCompatActivity {
 
     private MenuItem mMenuItem;
+    private boolean inSetting = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +35,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home: // Go back MainFragment
                 onBackPressed();
-
-                mMenuItem.setVisible(true);
-                setTitle(R.string.app_name);
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                inSetting = false;
                 break;
             case R.id.menu_setting: // Go SettingFragment
                 startFragment(new SettingFragment(), true);
+                inSetting = true;
 
                 mMenuItem.setVisible(false);
                 setTitle(R.string.menu_setting);
@@ -57,6 +56,20 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         // for miui，miui dev version will leak activity，miui internal is processing fix，Emmmmmm...
         ((ViewGroup) getWindow().getDecorView()).removeAllViews();
+    }
+
+    /**
+     * When back press in SettingFragment, back to MainFragment
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (inSetting) {
+            mMenuItem.setVisible(true);
+            setTitle(R.string.app_name);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            inSetting = !inSetting;
+        }
     }
 
     private void startFragment(Fragment fragment, boolean addBackStack) {
