@@ -1,13 +1,11 @@
 package com.mi.song.goaway;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
-
-import java.lang.reflect.Method;
 
 /**
  * @author by songhang on 2018/3/2
@@ -31,6 +29,15 @@ public class ScreenUtil {
         }
         calcRealScreenSize(context);
         return sWidth;
+    }
+
+    /**
+     * Tips bottom distance
+     */
+    public static int getTipsBottom(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String height = sp.getString(SettingFragment.PRE_KEY_BOTTOM, context.getString(R.string.bottom_distance));
+        return Integer.valueOf(height);
     }
 
     private static void calcRealScreenSize(Context context) {

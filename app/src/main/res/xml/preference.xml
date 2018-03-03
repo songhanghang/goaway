@@ -4,7 +4,7 @@
     >
 
     <PreferenceCategory
-        android:title="Tips">
+        android:title="@string/tips_title">
 
         <EditTextPreference
             android:title="Tip1"
@@ -32,6 +32,17 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/bottom_distance_title">
+
+        <EditTextPreference
+            android:title="px"
+            android:key="pre_key_bottom"
+            android:numeric="integer"
+            android:summary="@string/bottom_distance"
+            android:defaultValue="@string/bottom_distance" />
+
+    </PreferenceCategory>
 
     <!--<PreferenceCategory
         android:title="Colors">

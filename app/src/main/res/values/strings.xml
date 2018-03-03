@@ -5,6 +5,11 @@
     <string name="button_text_donate">Donate</string>
 
     <string name="used_hint">Used</string>
+
+    <string name="tips_title">Tips</string>
+    <string name="bottom_distance_title">Bottom distance</string>
+    <string name="bottom_distance">24</string>
+
     <string name="tip0">小撸怡情</string>
     <string name="tip1">大撸伤身</string>
     <string name="tip2">强撸灰飞烟灭</string>

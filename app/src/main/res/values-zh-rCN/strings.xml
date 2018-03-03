@@ -3,4 +3,6 @@
     <string name="button_text">用</string>
     <string name="button_text_donate">赏</string>
     <string name="used_hint">已使用</string>
+    <string name="tips_title">提示</string>
+    <string name="bottom_distance_title">底部距离</string>
 </resources>
