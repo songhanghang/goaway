@@ -54,10 +54,8 @@ public class GoAwayWallpaperService extends WallpaperService {
     }
 
     private class AwayEngine extends Engine {
-        private Paint textPaint;
-        //todo set pos in setting
-        private float bottom = 24; // 距离底部
 
+        private Paint textPaint;
 
         private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
@@ -128,9 +126,9 @@ public class GoAwayWallpaperService extends WallpaperService {
                 canvas.drawColor(TimeUtil.getColor(usedTime));
                 String useStr = getString(R.string.used_hint);
                 String timeStr = TimeUtil.timeToString(usedTime);
-
                 String tips = TimeUtil.getTips(usedTime, GoAwayWallpaperService.this);
                 String content = useStr + ": " + timeStr + " | " + tips;
+                int bottom = ScreenUtil.getTipsBottom(GoAwayWallpaperService.this);
                 canvas.drawText(content, mWidth / 2, mHeight - bottom, textPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();

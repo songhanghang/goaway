@@ -11,9 +11,17 @@
 
 # 更新说明
 
+ 20180303 version 2
+
+ 1. 支持自定义文案
+ 2. 支持自定义文案显示位置
+
+ 20180302 version 1
+
  1. 适配小米全面屏手机
  2. 适配虚拟键手机
  3. fix 重启手机无法显示时间提示
+
 
 # 开源声明
 [github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)

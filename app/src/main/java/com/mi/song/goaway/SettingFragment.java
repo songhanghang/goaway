@@ -15,6 +15,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     public static String PRE_KEY_TIP1 = "pre_key_tip1";
     public static String PRE_KEY_TIP2 = "pre_key_tip2";
     public static String PRE_KEY_TIP3 = "pre_key_tip3";
+    public static String PRE_KEY_BOTTOM = "pre_key_bottom";
 
     EditTextPreference editText0;
     EditTextPreference editText1;
