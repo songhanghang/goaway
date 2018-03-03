@@ -123,7 +123,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                     return;
                 }
                 long usedTime = calcNewUsedTime();
-                canvas.drawColor(TimeUtil.getColor(usedTime));
+                canvas.drawColor(TimeUtil.getColor(usedTime, GoAwayWallpaperService.this));
                 String useStr = getString(R.string.used_hint);
                 String timeStr = TimeUtil.timeToString(usedTime);
                 String tips = TimeUtil.getTips(usedTime, GoAwayWallpaperService.this);

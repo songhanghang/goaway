@@ -24,5 +24,6 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.github.didikee:AndroidDonate:0.1.0'
     implementation 'com.takisoft.fix:preference-v7:27.1.0.0'
+    implementation 'com.takisoft.fix:preference-v7-colorpicker:27.1.0.0'
     implementation 'com.baidu.mobstat:mtj-sdk:latest.integration'
 }

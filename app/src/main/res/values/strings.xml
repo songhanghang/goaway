@@ -22,5 +22,6 @@
 
     <string name="menu_setting">Setting</string>
     <string name="bottom_summary_format">Range: 0~%d, now: %d</string>
+    <string name="colors_title">Colors</string>
 
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:title="@string/tips_title">
@@ -33,6 +32,52 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="pre_key_colors"
+        android:title="@string/colors_title"
+        android:summary="">
+
+        <ColorPickerPreference
+            android:defaultValue="#4A7FEB"
+            android:dialogTitle="Colors"
+            android:key="pref_key_color0"
+            android:persistent="false"
+            android:title="Color1"
+            app:pref_sortColors="true"/>
+
+        <ColorPickerPreference
+            android:defaultValue="#46BF7F"
+            android:dialogTitle="Colors"
+            android:key="pref_key_color1"
+            android:persistent="false"
+            android:title="Color2"
+            app:pref_sortColors="true"/>
+
+        <ColorPickerPreference
+            android:defaultValue="#FF8746"
+            android:dialogTitle="Colors"
+            android:key="pref_key_color2"
+            android:persistent="false"
+            android:title="Color3"
+            app:pref_sortColors="true"/>
+
+        <ColorPickerPreference
+            android:defaultValue="#FF6243"
+            android:dialogTitle="Colors"
+            android:key="pref_key_color3"
+            android:persistent="false"
+            android:title="Color4"
+            app:pref_sortColors="true"/>
+
+        <ColorPickerPreference
+            android:defaultValue="#FF0000"
+            android:dialogTitle="Colors"
+            android:key="pref_key_color4"
+            android:persistent="false"
+            android:title="Color5"
+            app:pref_sortColors="true"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/bottom_distance_title">
 
         <EditTextPreference
@@ -43,19 +88,5 @@
             android:defaultValue="@string/bottom_distance" />
 
     </PreferenceCategory>
-
-    <!--<PreferenceCategory
-        android:title="Colors">
-
-        <ColorPickerPreference
-            android:defaultValue="#88C440"
-            android:dialogTitle="@string/color_picker_default_title"
-            android:key="pref_color"
-            android:persistent="false"
-            android:summary="Very nice color"
-            android:title="ColorPickerPreference"
-            app:pref_size="small" />
-
-    </PreferenceCategory>-->
 
 </PreferenceScreen>

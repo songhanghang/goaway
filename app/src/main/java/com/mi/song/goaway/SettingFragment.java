@@ -1,11 +1,11 @@
 package com.mi.song.goaway;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
+import com.takisoft.fix.support.v7.preference.ColorPickerPreference;
 import com.takisoft.fix.support.v7.preference.EditTextPreference;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;
 
@@ -13,11 +13,23 @@ import java.util.Locale;
 
 public class SettingFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener{
 
-    public static String PRE_KEY_TIP0 = "pre_key_tip0";
-    public static String PRE_KEY_TIP1 = "pre_key_tip1";
-    public static String PRE_KEY_TIP2 = "pre_key_tip2";
-    public static String PRE_KEY_TIP3 = "pre_key_tip3";
-    public static String PRE_KEY_BOTTOM = "pre_key_bottom";
+    public static final String PRE_KEY_TIP0 = "pre_key_tip0";
+    public static final String PRE_KEY_TIP1 = "pre_key_tip1";
+    public static final String PRE_KEY_TIP2 = "pre_key_tip2";
+    public static final String PRE_KEY_TIP3 = "pre_key_tip3";
+    public static final String PRE_KEY_BOTTOM = "pre_key_bottom";
+
+    public static final String PRE_KEY_COLOR0 = "pref_key_color0";
+    public static final String PRE_KEY_COLOR1 = "pref_key_color1";
+    public static final String PRE_KEY_COLOR2 = "pref_key_color2";
+    public static final String PRE_KEY_COLOR3 = "pref_key_color3";
+    public static final String PRE_KEY_COLOR4 = "pref_key_color4";
+
+    public static final int BLUE = 0XFF4A7FEB;
+    public static final int GREEN = 0XFF46BF7F;
+    public static final int ORGANE = 0XFFFF8746;
+    public static final int LIGHT_RED = 0XFFFF6243;
+    public static final int RED = 0xFFFF0000;
 
     EditTextPreference editText0;
     EditTextPreference editText1;
@@ -25,6 +37,12 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     EditTextPreference editText3;
 
     EditTextPreference editTextBottom;
+
+    public static ColorPickerPreference colorPicker0;
+    public static ColorPickerPreference colorPicker1;
+    public static ColorPickerPreference colorPicker2;
+    public static   ColorPickerPreference colorPicker3;
+    public static ColorPickerPreference colorPicker4;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -40,8 +58,15 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         editText3 = (EditTextPreference) findPreference(PRE_KEY_TIP3);
         editTextBottom = (EditTextPreference) findPreference(PRE_KEY_BOTTOM);
 
+        colorPicker0 = (ColorPickerPreference) findPreference(PRE_KEY_COLOR0);
+        colorPicker1 = (ColorPickerPreference) findPreference(PRE_KEY_COLOR1);
+        colorPicker2 = (ColorPickerPreference) findPreference(PRE_KEY_COLOR2);
+        colorPicker3 = (ColorPickerPreference) findPreference(PRE_KEY_COLOR3);
+        colorPicker4 = (ColorPickerPreference) findPreference(PRE_KEY_COLOR4);
+
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         setSummary(sp);
+        setColor(sp);
     }
 
     @Override
@@ -74,5 +99,13 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
         }
 
         editTextBottom.setSummary(String.format(Locale.getDefault(), getString(R.string.bottom_summary_format), height, bottomDistance));
+    }
+
+    private void setColor(SharedPreferences sharedPreferences) {
+        colorPicker0.setColor(sharedPreferences.getInt(PRE_KEY_COLOR0, BLUE));
+        colorPicker1.setColor(sharedPreferences.getInt(PRE_KEY_COLOR1, GREEN));
+        colorPicker2.setColor(sharedPreferences.getInt(PRE_KEY_COLOR2, ORGANE));
+        colorPicker3.setColor(sharedPreferences.getInt(PRE_KEY_COLOR3, LIGHT_RED));
+        colorPicker4.setColor(sharedPreferences.getInt(PRE_KEY_COLOR4, RED));
     }
 }
