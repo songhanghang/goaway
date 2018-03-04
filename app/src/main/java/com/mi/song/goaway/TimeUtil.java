@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,24 +74,26 @@ public class TimeUtil {
         return getZeroTime(time1) == getZeroTime(time2);
     }
 
-    public static int getColor(long time) {
+    public static int getColor(long time, Context context) {
         float h = 3600000f;
 
-        // todo set custom color
-        int blue = 0XFF4A7FEB;
-        int green = 0XFF46BF7F;
-        int orange = 0XFFFF8746;
-        int red = 0XFFFF6243;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        int color0 = sp.getInt(SettingFragment.PRE_KEY_COLOR0, SettingFragment.BLUE);
+        int color1 = sp.getInt(SettingFragment.PRE_KEY_COLOR1, SettingFragment.GREEN);
+        int color2 = sp.getInt(SettingFragment.PRE_KEY_COLOR2, SettingFragment.ORGANE);
+        int color3 = sp.getInt(SettingFragment.PRE_KEY_COLOR3, SettingFragment.LIGHT_RED);
+        int color4 = sp.getInt(SettingFragment.PRE_KEY_COLOR4, SettingFragment.RED);
 
         int color = Color.RED;
         if (time < h) {
-            color = (Integer) sArgbEvaluator.evaluate(time / h, blue, green);
+            color = (Integer) sArgbEvaluator.evaluate(time / h, color0, color1);
         } else if (time < 2 * h) {
-            color = (Integer) sArgbEvaluator.evaluate(time / h - 1, green, orange);
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 1, color1, color2);
         } else if (time < 3 * h) {
-            color = (Integer) sArgbEvaluator.evaluate(time / h - 2, orange, red);
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 2, color2, color3);
         } else if (time < 4 * h) {
-            color = (Integer) sArgbEvaluator.evaluate(time / h - 3, red, Color.RED);
+            color = (Integer) sArgbEvaluator.evaluate(time / h - 3, color3, color4);
         }
         return color;
     }
@@ -107,7 +108,7 @@ public class TimeUtil {
         } else if (time < 2 * h) {
             tips = sp.getString(SettingFragment.PRE_KEY_TIP1, context.getString(R.string.tip1));
         } else if (time < 3 * h) {
-            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip3));
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip2));
         }
         return tips;
     }
