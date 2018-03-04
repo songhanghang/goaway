@@ -102,13 +102,13 @@ public class TimeUtil {
         //todo set use phone time in setting, default 3h
         float h = 3600000f; //1h
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String tips = sp.getString(SettingFragment.PRE_KEY_TIP3, context.getString(R.string.tip3)); //when time > 3h
+        String tips = sp.getString(SettingFragment.PRE_KEY_TIP3, context.getString(R.string.tip4)); //when time > 3h
         if (time < h) {
-            tips = sp.getString(SettingFragment.PRE_KEY_TIP0, context.getString(R.string.tip0));
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP0, context.getString(R.string.tip1));
         } else if (time < 2 * h) {
-            tips = sp.getString(SettingFragment.PRE_KEY_TIP1, context.getString(R.string.tip1));
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP1, context.getString(R.string.tip2));
         } else if (time < 3 * h) {
-            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip2));
+            tips = sp.getString(SettingFragment.PRE_KEY_TIP2, context.getString(R.string.tip3));
         }
         return tips;
     }

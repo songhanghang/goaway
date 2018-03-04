@@ -8,33 +8,35 @@
         <EditTextPreference
             android:title="@string/tip1_title"
             android:key="pre_key_tip0"
-            android:summary="@string/tip0"
-            android:defaultValue="@string/tip0"/>
-
-        <EditTextPreference
-            android:title="@string/tip2_title"
-            android:key="pre_key_tip1"
             android:summary="@string/tip1"
             android:defaultValue="@string/tip1"/>
 
         <EditTextPreference
-            android:title="@string/tip3_title"
-            android:key="pre_key_tip2"
+            android:title="@string/tip2_title"
+            android:key="pre_key_tip1"
             android:summary="@string/tip2"
             android:defaultValue="@string/tip2"/>
 
         <EditTextPreference
-            android:title="@string/tip4_title"
-            android:key="pre_key_tip3"
+            android:title="@string/tip3_title"
+            android:key="pre_key_tip2"
             android:summary="@string/tip3"
             android:defaultValue="@string/tip3"/>
+
+        <EditTextPreference
+            android:title="@string/tip4_title"
+            android:key="pre_key_tip3"
+            android:summary="@string/tip4"
+            android:defaultValue="@string/tip4"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="pre_key_colors"
-        android:title="@string/colors_title"
-        android:summary="">
+        android:title="@string/colors_title">
+
+        <Preference
+            android:summary="@string/colors_summary"/>
 
         <ColorPickerPreference
             android:defaultValue="#4A7FEB"

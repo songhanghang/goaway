@@ -10,4 +10,7 @@
     <string name="tip3_title">提示3</string>
     <string name="tip4_title">提示4</string>
     <string name="bottom_summary_format">有效范围: 0~%d, 当前值: %d</string>
+    <string name="menu_setting">设置</string>
+    <string name="colors_title">颜色</string>
+    <string name="colors_summary">颜色随着你使用手机的时间而变化</string>
 </resources>
