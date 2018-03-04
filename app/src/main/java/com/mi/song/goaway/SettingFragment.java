@@ -38,11 +38,11 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
 
     EditTextPreference editTextBottom;
 
-    public static ColorPickerPreference colorPicker0;
-    public static ColorPickerPreference colorPicker1;
-    public static ColorPickerPreference colorPicker2;
-    public static   ColorPickerPreference colorPicker3;
-    public static ColorPickerPreference colorPicker4;
+    ColorPickerPreference colorPicker0;
+    ColorPickerPreference colorPicker1;
+    ColorPickerPreference colorPicker2;
+    ColorPickerPreference colorPicker3;
+    ColorPickerPreference colorPicker4;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -81,14 +81,14 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     }
 
     private void setSummary(SharedPreferences sharedPreferences) {
-        editText0.setSummary(sharedPreferences.getString(PRE_KEY_TIP0, getString(R.string.tip0)));
-        editText1.setSummary(sharedPreferences.getString(PRE_KEY_TIP1, getString(R.string.tip1)));
-        editText2.setSummary(sharedPreferences.getString(PRE_KEY_TIP2, getString(R.string.tip2)));
-        editText3.setSummary(sharedPreferences.getString(PRE_KEY_TIP3, getString(R.string.tip3)));
+        editText0.setSummary(sharedPreferences.getString(PRE_KEY_TIP0, getString(R.string.tip1)));
+        editText1.setSummary(sharedPreferences.getString(PRE_KEY_TIP1, getString(R.string.tip2)));
+        editText2.setSummary(sharedPreferences.getString(PRE_KEY_TIP2, getString(R.string.tip3)));
+        editText3.setSummary(sharedPreferences.getString(PRE_KEY_TIP3, getString(R.string.tip4)));
 
         int height = ScreenUtil.getHeight(getContext());
-        String bottomInPreference = sharedPreferences.getString(PRE_KEY_BOTTOM, getString(R.string.bottom_distance));
-        int bottomDistance = Integer.valueOf(bottomInPreference);
+        int bottomDistance = ScreenUtil.getTipsBottom(getContext());
+        String bottomInPreference;
 
         //check range
         if (bottomDistance < 0 || bottomDistance > height) {

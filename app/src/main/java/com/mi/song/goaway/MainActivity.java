@@ -1,9 +1,7 @@
 package com.mi.song.goaway;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -70,16 +68,6 @@ public class MainActivity extends AppCompatActivity {
             mMenuItem.setVisible(true);
             setTitle(R.string.app_name);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
-            // FIXME: change position
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putInt(SettingFragment.PRE_KEY_COLOR0, SettingFragment.colorPicker0.getColor());
-            editor.putInt(SettingFragment.PRE_KEY_COLOR1, SettingFragment.colorPicker1.getColor());
-            editor.putInt(SettingFragment.PRE_KEY_COLOR2, SettingFragment.colorPicker2.getColor());
-            editor.putInt(SettingFragment.PRE_KEY_COLOR3, SettingFragment.colorPicker3.getColor());
-            editor.putInt(SettingFragment.PRE_KEY_COLOR4, SettingFragment.colorPicker4.getColor());
-            editor.apply();
         }
         super.onBackPressed();
     }

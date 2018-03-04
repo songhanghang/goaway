@@ -8,39 +8,41 @@
         <EditTextPreference
             android:title="@string/tip1_title"
             android:key="pre_key_tip0"
-            android:summary="@string/tip0"
-            android:defaultValue="@string/tip0"/>
-
-        <EditTextPreference
-            android:title="@string/tip2_title"
-            android:key="pre_key_tip1"
             android:summary="@string/tip1"
             android:defaultValue="@string/tip1"/>
 
         <EditTextPreference
-            android:title="@string/tip3_title"
-            android:key="pre_key_tip2"
+            android:title="@string/tip2_title"
+            android:key="pre_key_tip1"
             android:summary="@string/tip2"
             android:defaultValue="@string/tip2"/>
 
         <EditTextPreference
-            android:title="@string/tip4_title"
-            android:key="pre_key_tip3"
+            android:title="@string/tip3_title"
+            android:key="pre_key_tip2"
             android:summary="@string/tip3"
             android:defaultValue="@string/tip3"/>
+
+        <EditTextPreference
+            android:title="@string/tip4_title"
+            android:key="pre_key_tip3"
+            android:summary="@string/tip4"
+            android:defaultValue="@string/tip4"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="pre_key_colors"
-        android:title="@string/colors_title"
-        android:summary="">
+        android:title="@string/colors_title">
+
+        <Preference
+            android:summary="@string/colors_summary"/>
 
         <ColorPickerPreference
             android:defaultValue="#4A7FEB"
             android:dialogTitle="Colors"
             android:key="pref_key_color0"
-            android:persistent="false"
+            android:persistent="true"
             android:title="Color1"
             app:pref_sortColors="true"/>
 
@@ -48,7 +50,7 @@
             android:defaultValue="#46BF7F"
             android:dialogTitle="Colors"
             android:key="pref_key_color1"
-            android:persistent="false"
+            android:persistent="true"
             android:title="Color2"
             app:pref_sortColors="true"/>
 
@@ -56,7 +58,7 @@
             android:defaultValue="#FF8746"
             android:dialogTitle="Colors"
             android:key="pref_key_color2"
-            android:persistent="false"
+            android:persistent="true"
             android:title="Color3"
             app:pref_sortColors="true"/>
 
@@ -64,7 +66,7 @@
             android:defaultValue="#FF6243"
             android:dialogTitle="Colors"
             android:key="pref_key_color3"
-            android:persistent="false"
+            android:persistent="true"
             android:title="Color4"
             app:pref_sortColors="true"/>
 
@@ -72,7 +74,7 @@
             android:defaultValue="#FF0000"
             android:dialogTitle="Colors"
             android:key="pref_key_color4"
-            android:persistent="false"
+            android:persistent="true"
             android:title="Color5"
             app:pref_sortColors="true"/>
     </PreferenceCategory>
