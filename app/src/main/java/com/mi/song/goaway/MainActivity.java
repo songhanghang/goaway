@@ -16,7 +16,7 @@ import com.baidu.mobstat.StatService;
 public class MainActivity extends AppCompatActivity {
 
     private MenuItem mMenuItem;
-    private boolean inSetting = false;
+    private android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home: // Go back MainFragment
                 onBackPressed();
-                inSetting = false;
                 break;
             case R.id.menu_setting: // Go SettingFragment
                 startFragment(new SettingFragment(), true);
-                inSetting = true;
 
                 mMenuItem.setVisible(false);
                 setTitle(R.string.menu_setting);
@@ -68,11 +66,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (inSetting) {
+        if (fm.findFragmentByTag(SettingFragment.class.getName()) != null) {
             mMenuItem.setVisible(true);
             setTitle(R.string.app_name);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            inSetting = !inSetting;
+
+            // FIXME: change position
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt(SettingFragment.PRE_KEY_COLOR0, SettingFragment.colorPicker0.getColor());
@@ -85,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startFragment(Fragment fragment, boolean addBackStack) {
-        android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.main_container, fragment);
+        transaction.replace(R.id.main_container, fragment, fragment.getClass().getName());
         if (addBackStack) {
             transaction.addToBackStack(null);
         }
