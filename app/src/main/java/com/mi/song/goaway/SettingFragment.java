@@ -38,11 +38,11 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
 
     EditTextPreference editTextBottom;
 
-    public static ColorPickerPreference colorPicker0;
-    public static ColorPickerPreference colorPicker1;
-    public static ColorPickerPreference colorPicker2;
-    public static   ColorPickerPreference colorPicker3;
-    public static ColorPickerPreference colorPicker4;
+    ColorPickerPreference colorPicker0;
+    ColorPickerPreference colorPicker1;
+    ColorPickerPreference colorPicker2;
+    ColorPickerPreference colorPicker3;
+    ColorPickerPreference colorPicker4;
 
     public SettingFragment() {
         // Required empty public constructor
