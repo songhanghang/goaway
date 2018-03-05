@@ -2,7 +2,9 @@
 
 # 下载
 
-[点这Download](https://pan.baidu.com/s/1ggIEGZh)
+ 版本: 20180305
+
+ [点这Download](https://pan.baidu.com/s/18_twLkladB9IrgkLGdjSdw)
 
 # 注意事项
  
@@ -11,17 +13,16 @@
 
 # 更新说明
 
- 20180303 version 2
+ 20180305 version 2
 
- 1. 支持自定义文案
- 2. 支持自定义文案显示位置
+ 1. 支持自定义提示及显示位置
+ 2. 支持自定义背景颜色
 
  20180302 version 1
 
  1. 适配小米全面屏手机
  2. 适配虚拟键手机
  3. fix 重启手机无法显示时间提示
-
 
 # 开源声明
 [github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)
