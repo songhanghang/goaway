@@ -4,7 +4,7 @@
 
  版本: 20180305
 
- [点这Download](https://pan.baidu.com/s/18_twLkladB9IrgkLGdjSdw)
+ [点这Download](https://pan.baidu.com/s/1wCIJRagTzCBBViAzZQfvkg)
 
 # 注意事项
  
@@ -17,6 +17,7 @@
 
  1. 支持自定义提示及显示位置
  2. 支持自定义 Material design 背景颜色
+ 3. 支持长按壁纸显示各个app使用时间记录
 
  20180302 version 1
 

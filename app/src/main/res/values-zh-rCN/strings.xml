@@ -13,4 +13,6 @@
     <string name="menu_setting">设置</string>
     <string name="colors_title">颜色</string>
     <string name="colors_summary">颜色随着你使用手机的时间而变化</string>
+    <string name="try_press">长按试试...</string>
+
 </resources>

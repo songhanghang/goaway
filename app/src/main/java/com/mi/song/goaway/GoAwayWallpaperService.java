@@ -7,7 +7,11 @@ import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.service.wallpaper.WallpaperService;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -18,6 +22,8 @@ import android.view.SurfaceHolder;
 
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
+    // Press delay millis that trigger display top usage apps
+    private static final long TRIGGER_PRESS_DELAY_MILLIS = 1000;
 
     // The time you used phone
     private long mUsedTime;
@@ -25,16 +31,10 @@ public class GoAwayWallpaperService extends WallpaperService {
     private long mStartTime;
     private int mHeight;
     private int mWidth;
+    // Display top usage apps
+    private boolean mIsDrawApps;
 
-    private long calcNewUsedTime() {
-        long endTime = System.currentTimeMillis();
-        // 新的一天开始了
-        if (!TimeUtil.isSameDay(mStartTime, endTime)) {
-            mUsedTime = 0;
-            mStartTime = TimeUtil.getZeroTime(endTime);
-        }
-        return mUsedTime + (endTime - mStartTime);
-    }
+    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate() {
@@ -46,6 +46,7 @@ public class GoAwayWallpaperService extends WallpaperService {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     @Override
@@ -53,9 +54,24 @@ public class GoAwayWallpaperService extends WallpaperService {
         return new AwayEngine();
     }
 
+    private long calcNewUsedTime() {
+        long endTime = System.currentTimeMillis();
+        // 新的一天开始了
+        if (!TimeUtil.isSameDay(mStartTime, endTime)) {
+            mUsedTime = 0;
+            mStartTime = TimeUtil.getZeroTime(endTime);
+        }
+        return mUsedTime + (endTime - mStartTime);
+    }
+
     private class AwayEngine extends Engine {
 
-        private Paint textPaint;
+        private Paint guideTextPaint;
+        private Paint tipsTextPaint;
+        private Paint itemBackgroundPaint;
+        private TextPaint itemTextPaint;
+        private String[] appUsageStrings = new String[5];
+        private Context context = GoAwayWallpaperService.this;
 
         private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
@@ -80,14 +96,32 @@ public class GoAwayWallpaperService extends WallpaperService {
         public void onCreate(SurfaceHolder surfaceHolder) {
             super.onCreate(surfaceHolder);
 
-            textPaint = new Paint();
-            textPaint.setColor(Color.WHITE);
-            textPaint.setTextSize(24);
-            textPaint.setTextAlign(Paint.Align.CENTER);
-            textPaint.setAntiAlias(true);
-            textPaint.setDither(true);
+            guideTextPaint = new Paint();
+            guideTextPaint.setColor(Color.WHITE);
+            guideTextPaint.setTextSize(100);
+            guideTextPaint.setTextAlign(Paint.Align.CENTER);
+            guideTextPaint.setAntiAlias(true);
+            guideTextPaint.setDither(true);
 
-            mUsedTime = TimeUtil.getTodayUsedTime(GoAwayWallpaperService.this);
+            tipsTextPaint = new Paint();
+            tipsTextPaint.setColor(Color.WHITE);
+            tipsTextPaint.setTextSize(24);
+            tipsTextPaint.setTextAlign(Paint.Align.CENTER);
+            tipsTextPaint.setAntiAlias(true);
+            tipsTextPaint.setDither(true);
+
+            itemBackgroundPaint = new Paint();
+            itemBackgroundPaint.setStyle(Paint.Style.FILL);
+            itemBackgroundPaint.setAntiAlias(true);
+            itemBackgroundPaint.setDither(true);
+
+            itemTextPaint = new TextPaint();
+            itemTextPaint.setTextSize(30);
+            itemTextPaint.setColor(Color.WHITE);
+            itemTextPaint.setAntiAlias(true);
+            itemTextPaint.setDither(true);
+
+            mUsedTime = TimeUtil.getTodayUsedTime(context);
             mStartTime = System.currentTimeMillis();
 
             IntentFilter filter = new IntentFilter();
@@ -116,6 +150,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                 return;
             }
 
+            long time = System.currentTimeMillis();
             Canvas canvas = null;
             try {
                 canvas = surfaceHolder.lockCanvas();
@@ -123,13 +158,37 @@ public class GoAwayWallpaperService extends WallpaperService {
                     return;
                 }
                 long usedTime = calcNewUsedTime();
-                canvas.drawColor(TimeUtil.getColor(usedTime, GoAwayWallpaperService.this));
+                // Draw background
+                canvas.drawColor(TimeUtil.getColor(usedTime, context));
+
+                // Draw press guide
+                if (!TimeUtil.isSeenAppUsage(context)) {
+                    canvas.drawText(context.getString(R.string.try_press), mWidth / 2, mHeight / 2, guideTextPaint);
+                }
+                // Draw top usage apps
+                if (mIsDrawApps) {
+                    int itemWidth = mWidth;
+                    int itemHeight = mHeight / 5;
+                    int[] colors = TimeUtil.getColorArray(context);
+                    int length = colors.length;
+                    for (int i = length - 1; i >= 0; i--) {
+                        itemBackgroundPaint.setColor(colors[i]);
+                        int top = (length - i - 1) * itemHeight;
+                        canvas.drawRect(0, top, itemWidth, top + itemHeight, itemBackgroundPaint);
+                        canvas.save();
+                        StaticLayout sl = new StaticLayout(appUsageStrings[length - i - 1], itemTextPaint, mWidth, Layout.Alignment.ALIGN_CENTER, 1.5f, 0.0f, true);
+                        canvas.translate(0, top + itemHeight / 5);
+                        sl.draw(canvas);
+                        canvas.restore();
+                    }
+                }
+                // Draw bottom tips
                 String useStr = getString(R.string.used_hint);
                 String timeStr = TimeUtil.timeToString(usedTime);
-                String tips = TimeUtil.getTips(usedTime, GoAwayWallpaperService.this);
+                String tips = TimeUtil.getTips(usedTime, context);
                 String content = useStr + ": " + timeStr + " | " + tips;
-                int bottom = ScreenUtil.getTipsBottom(GoAwayWallpaperService.this);
-                canvas.drawText(content, mWidth / 2, mHeight - bottom, textPaint);
+                int textBottom = ScreenUtil.getTipsBottom(context);
+                canvas.drawText(content, mWidth / 2, mHeight - textBottom, tipsTextPaint);
             } catch (Exception | OutOfMemoryError e) {
                 e.printStackTrace();
             } finally {
@@ -141,11 +200,37 @@ public class GoAwayWallpaperService extends WallpaperService {
                     }
                 }
             }
+            Log.i(TAG, "draw time : " + (System.currentTimeMillis() - time));
         }
 
         @Override
         public void onTouchEvent(MotionEvent event) {
             super.onTouchEvent(event);
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!TimeUtil.isSeenAppUsage(context)) {
+                                TimeUtil.setSeenAppUsage(context);
+                            }
+
+                            mIsDrawApps = true;
+                            AppsUtil.updateAppsUsage(context, appUsageStrings);
+                            doDraw();
+                        }
+                    }, TRIGGER_PRESS_DELAY_MILLIS);
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    if (mIsDrawApps) {
+                        mIsDrawApps = false;
+                        doDraw();
+                    }
+                    mHandler.removeCallbacksAndMessages(null);
+                    break;
+            }
         }
     }
+
 }
