@@ -2,7 +2,7 @@
 
 # 下载
 
-[点这Download](https://pan.baidu.com/s/1ggIEGZh)
+[点这Download](https://pan.baidu.com/s/18_twLkladB9IrgkLGdjSdw)
 
 # 注意事项
  
@@ -13,8 +13,8 @@
 
  20180303 version 2
 
- 1. 支持自定义文案
- 2. 支持自定义文案显示位置
+ 1. 支持自定义提示及显示位置
+ 2. 支持自定义背景颜色
 
  20180302 version 1
 
