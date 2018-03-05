@@ -1,5 +1,4 @@
 ![预览图](http://imglf4.nosdn.127.net/img/Q3dzYVVKdDlxT2s1M3BpTThTUG9IOUh1NmExb2JTMjhWT2svTCtHZ3l0Mm5pU0J6cUJuL01RPT0.jpg?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg)
-![预览图](https://github.com/songhanghang/goaway/blob/master/apk/appusage.jpeg)
 
 # 下载
 
