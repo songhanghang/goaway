@@ -23,7 +23,7 @@ import android.view.SurfaceHolder;
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
     private static final long TRIGGER_PRESS_DELAY_MILLIS = 1300;
-    private static final int DITHER_OFFSET = 100;
+    private static final int DITHER_OFFSET = 300;
 
     // The time you used phone
     private long mUsedTime;
