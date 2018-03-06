@@ -22,8 +22,8 @@ import android.view.SurfaceHolder;
 
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
-    // Press delay millis that trigger display top usage apps
-    private static final long TRIGGER_PRESS_DELAY_MILLIS = 1000;
+    private static final long TRIGGER_PRESS_DELAY_MILLIS = 1300;
+    private static final int DITHER_OFFSET = 100;
 
     // The time you used phone
     private long mUsedTime;
@@ -65,11 +65,14 @@ public class GoAwayWallpaperService extends WallpaperService {
     }
 
     private class AwayEngine extends Engine {
+        private float touchDownX;
+        private float touchDownY;
 
         private Paint guideTextPaint;
         private Paint tipsTextPaint;
         private Paint itemBackgroundPaint;
         private TextPaint itemTextPaint;
+
         private String[] appUsageStrings = new String[5];
         private Context context = GoAwayWallpaperService.this;
 
@@ -208,6 +211,8 @@ public class GoAwayWallpaperService extends WallpaperService {
             super.onTouchEvent(event);
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
+                    touchDownX = event.getX();
+                    touchDownY = event.getY();
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -221,6 +226,12 @@ public class GoAwayWallpaperService extends WallpaperService {
                         }
                     }, TRIGGER_PRESS_DELAY_MILLIS);
                     break;
+                case MotionEvent.ACTION_MOVE:
+                    // Ignore dither
+                    if (Math.abs(touchDownX - event.getX()) < DITHER_OFFSET
+                            && Math.abs(touchDownY - event.getY()) < DITHER_OFFSET ) {
+                          break;
+                    }
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     if (mIsDrawApps) {

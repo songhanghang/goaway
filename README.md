@@ -1,25 +1,39 @@
-![预览图](http://imglf4.nosdn.127.net/img/Q3dzYVVKdDlxT2s1M3BpTThTUG9IOUh1NmExb2JTMjhWT2svTCtHZ3l0Mm5pU0J6cUJuL01RPT0.jpg?imageView&thumbnail=500x0&quality=96&stripmeta=0&type=jpg)
+![预览图](https://wx4.sinaimg.cn/mw690/006292TQgy1fp2xd16zz6j30pm0iedn4.jpg)
 
-# 下载
+# 软件介绍
 
- 版本: 20180305
+  这是一款有意思的防沉迷应用...
 
- [点这Download](https://pan.baidu.com/s/1wCIJRagTzCBBViAzZQfvkg)
+  时刻提醒消耗在手机上的时间，
+
+  点亮关闭间帮你记录时间，
+
+  底部tips告知你当前状态，
+
+  五彩壁纸随着使用时间逐渐变化，
+
+  长按显示各个app的使用排名，
+
+  时刻警示你放下手机！
+
+# 2.0 下载 
+
+ [点这Download](https://www.pgyer.com/dIUF)
 
 # 注意事项
  
 1. 适配用的是miui，其他手机欢迎反馈...
 2. miui为省电优化，后台默认会冻结一些能力，所以需要手动打开，`进入 设置->电量和性能->省电优化->应用智能省电->远离手机（该app）->点击进入后台配置->无限制 ` （该app功能简单，刷新频率低，不会耗电，欢迎监督）
 
-# 更新说明
+# 2.0 更新说明
 
- 20180305 version 2
+  * 20180305 version 2
 
  1. 支持自定义提示及显示位置
  2. 支持自定义 Material design 背景颜色
- 3. 支持长按壁纸显示各个app使用时间记录
-
- 20180302 version 1
+ 3. 支持长按壁纸显示各个app使用排名
+ 
+ * 20180302 version 1
 
  1. 适配小米全面屏手机
  2. 适配虚拟键手机
@@ -38,15 +52,12 @@
  
  永不相见...
  
- 
- 
+
  各种app蚕食时间，
  
  不知不觉间，
  
  手机又没电...
- 
- 
  
  
  我想量化时间！
@@ -55,9 +66,7 @@
  
  于是有了这个app...
  
- 
- 
- 
+
  功能非常简单，
  
  显示手机真实使用时长，
@@ -70,7 +79,6 @@
  
 [我的博客： songhang.club](http://songhang.club)
 
-邮箱: 1131442853@qq.com
+ 邮箱: 1131442853@qq.com
 
 [github: https://github.com/songhanghang](https://github.com/songhanghang)
- 
