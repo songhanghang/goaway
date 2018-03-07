@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 
+import com.mi.song.goaway.util.ScreenUtil;
 import com.takisoft.fix.support.v7.preference.ColorPickerPreference;
 import com.takisoft.fix.support.v7.preference.EditTextPreference;
 import com.takisoft.fix.support.v7.preference.PreferenceFragmentCompat;

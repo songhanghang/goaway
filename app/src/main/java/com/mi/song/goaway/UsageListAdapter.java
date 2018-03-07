@@ -25,6 +25,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mi.song.goaway.util.AppsUtil;
+import com.mi.song.goaway.util.TimeUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.mi.song.goaway;
+package com.mi.song.goaway.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,6 +6,9 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
+
+import com.mi.song.goaway.R;
+import com.mi.song.goaway.SettingFragment;
 
 /**
  * @author by songhang on 2018/3/2

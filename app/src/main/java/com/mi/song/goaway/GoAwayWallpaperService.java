@@ -17,6 +17,10 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.mi.song.goaway.util.AppsUtil;
+import com.mi.song.goaway.util.ScreenUtil;
+import com.mi.song.goaway.util.TimeUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

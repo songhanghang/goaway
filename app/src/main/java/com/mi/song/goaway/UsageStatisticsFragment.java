@@ -29,6 +29,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.mi.song.goaway.util.AppsUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

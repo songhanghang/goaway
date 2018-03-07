@@ -1,9 +1,12 @@
-package com.mi.song.goaway;
+package com.mi.song.goaway.util;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.mi.song.goaway.R;
+import com.mi.song.goaway.SettingFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

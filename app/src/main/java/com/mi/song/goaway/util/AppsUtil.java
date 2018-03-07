@@ -1,4 +1,4 @@
-package com.mi.song.goaway;
+package com.mi.song.goaway.util;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -9,6 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.mi.song.goaway.R;
+import com.mi.song.goaway.UsageListAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
