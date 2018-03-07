@@ -51,6 +51,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.use_btn).setOnClickListener(this);
         view.findViewById(R.id.pay_btn).setOnClickListener(this);
         view.findViewById(R.id.note_btn).setOnClickListener(this);
+        view.findViewById(R.id.usage_fab).setOnClickListener(this);
     }
 
     @Override
@@ -79,6 +80,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             pay();
         } else if (id == R.id.note_btn) {
             note();
+        } else if (id == R.id.usage_fab) {
+            usage();
         }
     }
 
@@ -94,6 +97,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void usage() {
+        ((MainActivity)getActivity()).startFragment(new UsageStatisticsFragment(), true);
     }
 
     private void pay() {
