@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">goaway</string>
     <string name="button_settings_wallpaper">设置壁纸</string>
-    <string name="button_usage">使用排行</string>
+    <string name="button_usage">App排名</string>
     <string name="button_donate">打赏</string>
     <string name="button_update">读我</string>
     <string name="used_hint">已使用</string>

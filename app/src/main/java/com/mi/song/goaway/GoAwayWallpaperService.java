@@ -230,9 +230,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                             }
 
                             mIsDrawApps = true;
-                            List<UsageListAdapter.CustomUsageStats> customUsageStatsList = new ArrayList<>();
-                            AppsUtil.updateAppsUsage(context, UsageStatsManager.INTERVAL_DAILY, customUsageStatsList);
-                            AppsUtil.getAppInfoForWallPaper(context, customUsageStatsList, appUsageStrings);
+                            appUsageStrings = AppsUtil.updateWallpaperStringArray(context);
                             doDraw();
                         }
                     }, TRIGGER_PRESS_DELAY_MILLIS);

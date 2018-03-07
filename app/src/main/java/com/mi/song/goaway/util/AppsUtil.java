@@ -6,14 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.Toast;
-
 import com.mi.song.goaway.R;
-import com.mi.song.goaway.adapter.UsageListAdapter;
-
+import com.mi.song.goaway.bean.MyUsageStats;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -28,17 +24,18 @@ public class AppsUtil {
 
     /**
      * get appUsage based on intervalType
-     * @param context The context
+     *
+     * @param context      The context
      * @param intervalType intervalType
-     * @param customUsageStatsList receiver to get UsageStats list
      */
-    public static void updateAppsUsage(Context context, int intervalType, List<UsageListAdapter.CustomUsageStats> customUsageStatsList) {
+    public static List<MyUsageStats> updateAppsUsageData(Context context, int intervalType) {
+        List<MyUsageStats> list = new ArrayList<>();
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         if (usageStatsManager == null)
-            return;
+            return list;
 
         // Query usage apps state
-        List<UsageStats> queryUsageStats = new ArrayList<>();
+        List<UsageStats> queryUsageStats;
         long time = System.currentTimeMillis();
         Calendar cal = Calendar.getInstance();
         switch (intervalType) {
@@ -75,37 +72,36 @@ public class AppsUtil {
             }
         });
 
-        customUsageStatsList.clear();
         for (int i = 0; i < queryUsageStats.size(); i++) {
-            UsageListAdapter.CustomUsageStats customUsageStats = new UsageListAdapter.CustomUsageStats();
+            MyUsageStats customUsageStats = new MyUsageStats();
             customUsageStats.usageStats = queryUsageStats.get(i);
             try {
-                Drawable appIcon = context.getPackageManager()
-                        .getApplicationIcon(customUsageStats.usageStats.getPackageName());
-                customUsageStats.appIcon = appIcon;
+                customUsageStats.appIcon = context.getPackageManager().getApplicationIcon(customUsageStats.usageStats.getPackageName());
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w("", String.format("App Icon is not found for %s",
-                        customUsageStats.usageStats.getPackageName()));
-                customUsageStats.appIcon = context
-                        .getDrawable(R.mipmap.ic_launcher);
+                e.printStackTrace();
+                customUsageStats.appIcon = context.getDrawable(R.mipmap.ic_launcher);
             }
-            customUsageStatsList.add(customUsageStats);
+            list.add(customUsageStats);
         }
+
+        return list;
     }
 
-  /**
-   * get string array for wallpaper
-   * @param appUsageStrings receiver to get info array
-   */
-    public static void getAppInfoForWallPaper(Context context, List<UsageListAdapter.CustomUsageStats> queryUsageStats, String[] appUsageStrings) {
+    /**
+     * get string array for wallpaper
+     *
+     */
+    public static String[] updateWallpaperStringArray(Context context) {
+        String[] appUsageStrings = new String[5];
         // Convert to appUsageStrings
         StringBuilder itemStrBuilder = new StringBuilder();
         int index = 0;
         // Item contain app count
         int itemCount = 3;
-        int size = queryUsageStats.size();
+        List<MyUsageStats> list = updateAppsUsageData(context, UsageStatsManager.INTERVAL_DAILY);
+        int size = list.size();
         for (int i = 0; i < size; i++) {
-            UsageStats usageStats = queryUsageStats.get(i).usageStats;
+            UsageStats usageStats = list.get(i).usageStats;
             itemStrBuilder.append(getAppName(context, usageStats.getPackageName()))
                     .append(" : ")
                     .append(TimeUtil.timeToString(usageStats.getTotalTimeInForeground()))
@@ -119,6 +115,7 @@ public class AppsUtil {
                 }
             }
         }
+        return appUsageStrings;
     }
 
     public static synchronized CharSequence getAppName(Context context, String packageName) {

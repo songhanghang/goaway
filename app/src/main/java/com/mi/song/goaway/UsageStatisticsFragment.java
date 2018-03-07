@@ -31,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
 import com.mi.song.goaway.adapter.UsageListAdapter;
+import com.mi.song.goaway.bean.MyUsageStats;
 import com.mi.song.goaway.util.AppsUtil;
 
 import java.util.ArrayList;
@@ -89,9 +90,8 @@ public class UsageStatisticsFragment extends Fragment {
         StatsUsageInterval statsUsageInterval = StatsUsageInterval
                 .getValue(strings[position]);
         if (statsUsageInterval != null) {
-          List<UsageListAdapter.CustomUsageStats> customUsageStatsList = new ArrayList<>();
-          AppsUtil.updateAppsUsage(getActivity().getApplicationContext(), statsUsageInterval.mInterval, customUsageStatsList);
-          mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
+          List<MyUsageStats> list = AppsUtil.updateAppsUsageData(getActivity().getApplicationContext(), statsUsageInterval.mInterval);
+          mUsageListAdapter.setCustomUsageStatsList(list);
           mUsageListAdapter.notifyDataSetChanged();
           runLayoutAnimation(mRecyclerView);
           mRecyclerView.scrollToPosition(0);
