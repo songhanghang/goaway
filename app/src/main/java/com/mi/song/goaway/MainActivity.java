@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         // statistics
         StatService.start(this);
         startFragment(new MainFragment(), false);
@@ -71,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    public void startFragment(Fragment fragment, boolean addBackStack) {
+    protected void startFragment(Fragment fragment, boolean addBackStack) {
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        transaction.replace(R.id.main_container, fragment, fragment.getClass().getName());
+        transaction.replace(android.R.id.content, fragment, fragment.getClass().getName());
         if (addBackStack) {
             transaction.addToBackStack(null);
         }

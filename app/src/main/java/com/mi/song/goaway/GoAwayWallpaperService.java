@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
+import com.mi.song.goaway.adapter.UsageListAdapter;
 import com.mi.song.goaway.util.AppsUtil;
 import com.mi.song.goaway.util.ScreenUtil;
 import com.mi.song.goaway.util.TimeUtil;

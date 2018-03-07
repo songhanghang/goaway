@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">goaway</string>
-    <string name="button_text">Use</string>
+    <string name="set_wallpaper">SET WALLPAPER</string>
+    <string name="button_usage">USAGE INFO</string>
+    <string name="button_update">README</string>
     <string name="button_text_help" translatable="false">注意：miui为省电优化，后台默认会冻结应用，需要手动开启无限制，进入 设置->电量和性能->省电优化->应用智能省电->goaway（该app）->点击进入后台配置->无限制  该app功能简单，刷新频率低，不会耗电，已经开源，欢迎监督  \n-- 点击查看更新！--</string>
-    <string name="button_text_donate">Donate</string>
-
+    <string name="button_donate">Donate</string>
     <string name="used_hint">Used</string>
-
-
     <string name="bottom_distance_title">Bottom distance</string>
     <string name="bottom_distance" translatable="false">24</string>
 
@@ -28,5 +27,8 @@
     <string name="try_press">Try Press Long …</string>
 
     <string name="time_span">Time</string>
+
+    <string name="app_info">这是一款有意思的防沉迷应用...\n时刻提醒消耗在手机上的时间，\n点亮关闭间帮你记录时间，\n底部tips告知你当前状态，\n五彩壁纸随着使用时间逐渐变化，\n长按显示各个app的使用排名，\n时刻警示你放下手机！</string>
+
 
 </resources>
