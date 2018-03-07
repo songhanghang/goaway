@@ -19,11 +19,12 @@ package com.mi.song.goaway;
 import android.app.usage.UsageStatsManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -68,7 +69,9 @@ public class UsageStatisticsFragment extends Fragment {
     mUsageListAdapter = new UsageListAdapter();
     mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
     mLayoutManager = mRecyclerView.getLayoutManager();
-    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    LayoutAnimationController controller =
+            AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.anim_layout_fall_down);
+    mRecyclerView.setLayoutAnimation(controller);
     mRecyclerView.scrollToPosition(0);
     mRecyclerView.setAdapter(mUsageListAdapter);
    //mOpenUsageSettingButton = (Button) rootView.findViewById(R.id.button_open_usage_setting);
@@ -89,6 +92,7 @@ public class UsageStatisticsFragment extends Fragment {
           AppsUtil.updateAppsUsage(getActivity().getApplicationContext(), statsUsageInterval.mInterval, customUsageStatsList);
           mUsageListAdapter.setCustomUsageStatsList(customUsageStatsList);
           mUsageListAdapter.notifyDataSetChanged();
+          runLayoutAnimation(mRecyclerView);
           mRecyclerView.scrollToPosition(0);
         }
       }
@@ -99,6 +103,15 @@ public class UsageStatisticsFragment extends Fragment {
     });
   }
 
+  private void runLayoutAnimation(final RecyclerView recyclerView) {
+
+    final LayoutAnimationController controller =
+            AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.anim_layout_fall_down);
+
+    recyclerView.setLayoutAnimation(controller);
+    recyclerView.getAdapter().notifyDataSetChanged();
+    recyclerView.scheduleLayoutAnimation();
+  }
 
   /**
    * Enum represents the intervals for {@link android.app.usage.UsageStatsManager} so that
