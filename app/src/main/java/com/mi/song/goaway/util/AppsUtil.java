@@ -1,4 +1,4 @@
-package com.mi.song.goaway;
+package com.mi.song.goaway.util;
 
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -8,7 +8,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.widget.Toast;
-
+import com.mi.song.goaway.R;
+import com.mi.song.goaway.bean.MyUsageStats;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -19,15 +22,39 @@ import java.util.List;
 
 public class AppsUtil {
 
-    public static void updateAppsUsage(Context context, String[] appUsageStrings) {
+    /**
+     * get appUsage based on intervalType
+     *
+     * @param context      The context
+     * @param intervalType intervalType
+     */
+    public static List<MyUsageStats> updateAppsUsageData(Context context, int intervalType) {
+        List<MyUsageStats> list = new ArrayList<>();
         UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         if (usageStatsManager == null)
-            return;
+            return list;
 
         // Query usage apps state
+        List<UsageStats> queryUsageStats;
         long time = System.currentTimeMillis();
-        List<UsageStats> queryUsageStats = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, TimeUtil.getZeroTime(time),
-                TimeUtil.getZeroTime(time + TimeUtil.DAY));
+        Calendar cal = Calendar.getInstance();
+        switch (intervalType) {
+            case UsageStatsManager.INTERVAL_DAILY:
+                queryUsageStats = usageStatsManager.queryUsageStats(intervalType, TimeUtil.getZeroTime(time), time);
+                break;
+            case UsageStatsManager.INTERVAL_WEEKLY:
+                cal.add(Calendar.DAY_OF_MONTH, -7);
+                queryUsageStats = usageStatsManager.queryUsageStats(intervalType, TimeUtil.getZeroTime(cal.getTimeInMillis()), time);
+                break;
+            case UsageStatsManager.INTERVAL_MONTHLY:
+                cal.add(Calendar.MONTH, -1);
+                queryUsageStats = usageStatsManager.queryUsageStats(intervalType, TimeUtil.getZeroTime(cal.getTimeInMillis()), time);
+                break;
+            default:
+                queryUsageStats = usageStatsManager.queryUsageStats(intervalType, TimeUtil.getZeroTime(time), time);
+                break;
+        }
+
         if (queryUsageStats.size() == 0) {
             Toast.makeText(context, "请允许访问使用记录", Toast.LENGTH_LONG).show();
             try {
@@ -45,14 +72,36 @@ public class AppsUtil {
             }
         });
 
+        for (int i = 0; i < queryUsageStats.size(); i++) {
+            MyUsageStats customUsageStats = new MyUsageStats();
+            customUsageStats.usageStats = queryUsageStats.get(i);
+            try {
+                customUsageStats.appIcon = context.getPackageManager().getApplicationIcon(customUsageStats.usageStats.getPackageName());
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+                customUsageStats.appIcon = context.getDrawable(R.mipmap.ic_launcher);
+            }
+            list.add(customUsageStats);
+        }
+
+        return list;
+    }
+
+    /**
+     * get string array for wallpaper
+     *
+     */
+    public static String[] updateWallpaperStringArray(Context context) {
+        String[] appUsageStrings = new String[5];
         // Convert to appUsageStrings
         StringBuilder itemStrBuilder = new StringBuilder();
         int index = 0;
         // Item contain app count
         int itemCount = 3;
-        int size = queryUsageStats.size();
+        List<MyUsageStats> list = updateAppsUsageData(context, UsageStatsManager.INTERVAL_DAILY);
+        int size = list.size();
         for (int i = 0; i < size; i++) {
-            UsageStats usageStats = queryUsageStats.get(i);
+            UsageStats usageStats = list.get(i).usageStats;
             itemStrBuilder.append(getAppName(context, usageStats.getPackageName()))
                     .append(" : ")
                     .append(TimeUtil.timeToString(usageStats.getTotalTimeInForeground()))
@@ -66,6 +115,7 @@ public class AppsUtil {
                 }
             }
         }
+        return appUsageStrings;
     }
 
     public static synchronized CharSequence getAppName(Context context, String packageName) {

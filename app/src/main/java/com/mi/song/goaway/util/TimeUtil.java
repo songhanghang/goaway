@@ -1,9 +1,12 @@
-package com.mi.song.goaway;
+package com.mi.song.goaway.util;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.mi.song.goaway.R;
+import com.mi.song.goaway.SettingFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -67,10 +70,12 @@ public class TimeUtil {
             return s + "s";
         } else if (s < 3600) {
             return s / 60 + "m" + timeToString(s % 60 * 1000);
-        } else if (s <= 86400) {
+        } else if (s <= 86400) { //A DAY
             return s / 3600 + "h" + timeToString(s % 3600 * 1000);
+        } else if (s <= 86400 * 31) { //A MONTH
+            return s / (86400) + "d" + timeToString(s % 86400 * 1000);
         }
-
+        //if time > A MONTH, return err
         return "err";
     }
 

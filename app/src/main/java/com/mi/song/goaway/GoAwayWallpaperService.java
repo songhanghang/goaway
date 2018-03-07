@@ -1,5 +1,6 @@
 package com.mi.song.goaway;
 
+import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,14 @@ import android.text.TextPaint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
+
+import com.mi.song.goaway.adapter.UsageListAdapter;
+import com.mi.song.goaway.util.AppsUtil;
+import com.mi.song.goaway.util.ScreenUtil;
+import com.mi.song.goaway.util.TimeUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author by songhang on 2018/2/21
@@ -173,10 +182,10 @@ public class GoAwayWallpaperService extends WallpaperService {
                     int itemWidth = mWidth;
                     int itemHeight = mHeight / 5;
                     int[] colors = TimeUtil.getColorArray(context);
-                    int length = colors.length;
+                    int length = colors.length; //5
                     for (int i = length - 1; i >= 0; i--) {
                         itemBackgroundPaint.setColor(colors[i]);
-                        int top = (length - i - 1) * itemHeight;
+                        int top = (length - i - 1) * itemHeight; //0~4
                         canvas.drawRect(0, top, itemWidth, top + itemHeight, itemBackgroundPaint);
                         canvas.save();
                         StaticLayout sl = new StaticLayout(appUsageStrings[length - i - 1], itemTextPaint, mWidth, Layout.Alignment.ALIGN_CENTER, 1.5f, 0.0f, true);
@@ -221,7 +230,7 @@ public class GoAwayWallpaperService extends WallpaperService {
                             }
 
                             mIsDrawApps = true;
-                            AppsUtil.updateAppsUsage(context, appUsageStrings);
+                            appUsageStrings = AppsUtil.updateWallpaperStringArray(context);
                             doDraw();
                         }
                     }, TRIGGER_PRESS_DELAY_MILLIS);

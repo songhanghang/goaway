@@ -25,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mi.song.goaway.util.TimeUtil;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -48,9 +50,24 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.use_btn).setOnClickListener(this);
-        view.findViewById(R.id.pay_btn).setOnClickListener(this);
-        view.findViewById(R.id.note_btn).setOnClickListener(this);
+        int[] colors = TimeUtil.getColorArray(getActivity());
+
+        View textView = view.findViewById(R.id.info);
+        View payBtn = view.findViewById(R.id.pay_btn);
+        View noteBtn = view.findViewById(R.id.note_btn);
+        View usageBtn = view.findViewById(R.id.usage_btn);
+        View useBtn = view.findViewById(R.id.use_btn);
+
+        textView.setBackgroundColor(colors[0]);
+        payBtn.setBackgroundColor(colors[1]);
+        noteBtn.setBackgroundColor(colors[2]);
+        usageBtn.setBackgroundColor(colors[3]);
+        useBtn.setBackgroundColor(colors[4]);
+
+        payBtn.setOnClickListener(this);
+        noteBtn.setOnClickListener(this);
+        usageBtn.setOnClickListener(this);
+        useBtn.setOnClickListener(this);
     }
 
     @Override
@@ -79,6 +96,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             pay();
         } else if (id == R.id.note_btn) {
             note();
+        } else if (id == R.id.usage_btn) {
+            usage();
         }
     }
 
@@ -94,6 +113,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void usage() {
+        ((MainActivity)getActivity()).startFragment(new UsageStatisticsFragment(), true);
     }
 
     private void pay() {
