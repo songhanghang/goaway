@@ -4,6 +4,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.provider.Settings;
@@ -105,7 +106,7 @@ public class AppsUtil {
         int size = queryUsageStats.size();
         for (int i = 0; i < size; i++) {
             UsageStats usageStats = queryUsageStats.get(i).usageStats;
-            itemStrBuilder.append(getAppName(usageStats.getPackageName()))
+            itemStrBuilder.append(getAppName(context, usageStats.getPackageName()))
                     .append(" : ")
                     .append(TimeUtil.timeToString(usageStats.getTotalTimeInForeground()))
                     .append("\n");
@@ -120,16 +121,15 @@ public class AppsUtil {
         }
     }
 
-    public static synchronized CharSequence getAppName(String packageName) {
-        /*try {
+    public static synchronized CharSequence getAppName(Context context, String packageName) {
+        try {
             PackageManager packageManager = context.getPackageManager();
             ApplicationInfo packageInfo = packageManager.getApplicationInfo(packageName, 0);
             return packageManager.getApplicationLabel(packageInfo);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
-        int index = packageName.lastIndexOf(".");
-        return packageName.substring(index + 1, packageName.length());
+        }
+        return packageName;
     }
 
 }

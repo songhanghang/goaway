@@ -17,6 +17,7 @@
 package com.mi.song.goaway;
 
 import android.app.usage.UsageStats;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -38,6 +39,11 @@ import java.util.List;
 public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.ViewHolder> {
 
     private List<CustomUsageStats> mCustomUsageStatsList = new ArrayList<>();
+    private Context context;
+
+    public UsageListAdapter(Context context) {
+        this.context = context;
+    }
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
@@ -67,9 +73,6 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
         }
     }
 
-    public UsageListAdapter() {
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
@@ -79,7 +82,7 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getPackageName().setText( AppsUtil.getAppName(
+        viewHolder.getPackageName().setText( AppsUtil.getAppName(context,
                 mCustomUsageStatsList.get(position).usageStats.getPackageName()));
         String time = TimeUtil.timeToString(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground());
         viewHolder.getLastTimeUsed().setText(time);

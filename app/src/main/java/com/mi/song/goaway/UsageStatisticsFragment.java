@@ -66,7 +66,7 @@ public class UsageStatisticsFragment extends Fragment {
   public void onViewCreated(View rootView, Bundle savedInstanceState) {
     super.onViewCreated(rootView, savedInstanceState);
 
-    mUsageListAdapter = new UsageListAdapter();
+    mUsageListAdapter = new UsageListAdapter(getActivity());
     mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
     mLayoutManager = mRecyclerView.getLayoutManager();
     LayoutAnimationController controller =
@@ -74,7 +74,7 @@ public class UsageStatisticsFragment extends Fragment {
     mRecyclerView.setLayoutAnimation(controller);
     mRecyclerView.scrollToPosition(0);
     mRecyclerView.setAdapter(mUsageListAdapter);
-   //mOpenUsageSettingButton = (Button) rootView.findViewById(R.id.button_open_usage_setting);
+
     mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
     SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
             R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
