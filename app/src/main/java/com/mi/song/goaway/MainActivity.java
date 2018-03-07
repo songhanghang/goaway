@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void startFragment(Fragment fragment, boolean addBackStack) {
+    public void startFragment(Fragment fragment, boolean addBackStack) {
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.replace(R.id.main_container, fragment, fragment.getClass().getName());

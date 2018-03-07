@@ -25,6 +25,8 @@
     <string name="colors_title">Colors</string>
     <string name="colors_summary">The colors below change with the time you use your phone</string>
 
-    <string name="try_press">Try Press Long ...</string>
+    <string name="try_press">Try Press Long …</string>
+
+    <string name="time_span">Time</string>
 
 </resources>
