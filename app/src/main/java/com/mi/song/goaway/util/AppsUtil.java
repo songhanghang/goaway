@@ -79,7 +79,7 @@ public class AppsUtil {
                 customUsageStats.appIcon = context.getPackageManager().getApplicationIcon(customUsageStats.usageStats.getPackageName());
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
-                customUsageStats.appIcon = context.getDrawable(R.mipmap.ic_launcher);
+                customUsageStats.appIcon = context.getDrawable(R.mipmap.ic_android);
             }
             list.add(customUsageStats);
         }
