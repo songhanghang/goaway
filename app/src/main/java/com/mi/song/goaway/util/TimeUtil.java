@@ -112,11 +112,11 @@ public class TimeUtil {
     
     public static int[] getColorArray(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        int color0 = sp.getInt(SettingFragment.PRE_KEY_COLOR0, SettingFragment.BLUE);
-        int color1 = sp.getInt(SettingFragment.PRE_KEY_COLOR1, SettingFragment.GREEN);
-        int color2 = sp.getInt(SettingFragment.PRE_KEY_COLOR2, SettingFragment.ORGANE);
-        int color3 = sp.getInt(SettingFragment.PRE_KEY_COLOR3, SettingFragment.LIGHT_RED);
-        int color4 = sp.getInt(SettingFragment.PRE_KEY_COLOR4, SettingFragment.RED);
+        int color0 = sp.getInt(SettingFragment.PRE_KEY_COLOR0, SettingFragment.DEFAULT_COLOR_0);
+        int color1 = sp.getInt(SettingFragment.PRE_KEY_COLOR1, SettingFragment.DEFAULT_COLOR_1);
+        int color2 = sp.getInt(SettingFragment.PRE_KEY_COLOR2, SettingFragment.DEFAULT_COLOR_2);
+        int color3 = sp.getInt(SettingFragment.PRE_KEY_COLOR3, SettingFragment.DEFAULT_COLOR_3);
+        int color4 = sp.getInt(SettingFragment.PRE_KEY_COLOR4, SettingFragment.DEFAULT_COLOR_4);
         return new int[] {color0, color1, color2, color3, color4};
     }
 

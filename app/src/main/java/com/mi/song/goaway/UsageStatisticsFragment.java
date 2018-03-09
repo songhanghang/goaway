@@ -18,7 +18,9 @@ package com.mi.song.goaway;
 
 import android.app.usage.UsageStatsManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +36,6 @@ import com.mi.song.goaway.adapter.UsageListAdapter;
 import com.mi.song.goaway.bean.MyUsageStats;
 import com.mi.song.goaway.util.AppsUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,12 +43,8 @@ import java.util.List;
  */
 public class UsageStatisticsFragment extends Fragment {
 
-  private static final String TAG = "UsageStatisticsFragment";
-
-  UsageListAdapter mUsageListAdapter;
-  RecyclerView mRecyclerView;
-  RecyclerView.LayoutManager mLayoutManager;
-  Spinner mSpinner;
+  private UsageListAdapter mUsageListAdapter;
+  private RecyclerView mRecyclerView;
 
   public UsageStatisticsFragment() {
     // Required empty public constructor
@@ -59,7 +56,7 @@ public class UsageStatisticsFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+  public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     return inflater.inflate(R.layout.fragment_usage_statistics, container, false);
   }
@@ -70,18 +67,18 @@ public class UsageStatisticsFragment extends Fragment {
 
     mUsageListAdapter = new UsageListAdapter(getActivity());
     mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_app_usage);
-    mLayoutManager = mRecyclerView.getLayoutManager();
-    LayoutAnimationController controller =
-            AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.anim_layout_fall_down);
+    GridLayoutManager layoutManager = new GridLayoutManager(getContext(),4);
+    mRecyclerView.setLayoutManager(layoutManager);
+    LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.anim_layout_fall_down);
     mRecyclerView.setLayoutAnimation(controller);
     mRecyclerView.scrollToPosition(0);
     mRecyclerView.setAdapter(mUsageListAdapter);
 
-    mSpinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
+    Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_time_span);
     SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(getActivity(),
             R.array.action_list, android.R.layout.simple_spinner_dropdown_item);
-    mSpinner.setAdapter(spinnerAdapter);
-    mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    spinner.setAdapter(spinnerAdapter);
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
       String[] strings = getResources().getStringArray(R.array.action_list);
 
@@ -108,7 +105,6 @@ public class UsageStatisticsFragment extends Fragment {
 
     final LayoutAnimationController controller =
             AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.anim_layout_fall_down);
-
     recyclerView.setLayoutAnimation(controller);
     recyclerView.getAdapter().notifyDataSetChanged();
     recyclerView.scheduleLayoutAnimation();
@@ -119,7 +115,7 @@ public class UsageStatisticsFragment extends Fragment {
    * values for intervals can be found by a String representation.
    */
   //VisibleForTesting
-  static enum StatsUsageInterval {
+   enum StatsUsageInterval {
     DAILY("Daily", UsageStatsManager.INTERVAL_DAILY),
     WEEKLY("Weekly", UsageStatsManager.INTERVAL_WEEKLY),
     MONTHLY("Monthly", UsageStatsManager.INTERVAL_MONTHLY);

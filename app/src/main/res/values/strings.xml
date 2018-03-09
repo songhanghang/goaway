@@ -14,10 +14,10 @@
     <string name="tip2_title">Tip2</string>
     <string name="tip3_title">Tip3</string>
     <string name="tip4_title">Tip4</string>
-    <string name="tip1" translatable="false">小撸怡情</string>
-    <string name="tip2" translatable="false">大撸伤身</string>
-    <string name="tip3" translatable="false">强撸灰飞烟灭</string>
-    <string name="tip4" translatable="false">赠你一天血红!</string>
+    <string name="tip1" translatable="false">怡情</string>
+    <string name="tip2" translatable="false">伤身</string>
+    <string name="tip3" translatable="false">灰飞烟灭</string>
+    <string name="tip4" translatable="false">自暴自弃</string>
 
     <string name="menu_setting">Setting</string>
     <string name="bottom_summary_format">Range: 0~%d, now: %d</string>

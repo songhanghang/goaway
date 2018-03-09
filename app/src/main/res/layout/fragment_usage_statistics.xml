@@ -40,7 +40,6 @@
         android:drawSelectorOnTop="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layoutAnimation="@anim/anim_layout_fall_down"
-        app:layoutManager="LinearLayoutManager"/>
+        android:layoutAnimation="@anim/anim_layout_fall_down"/>
 
 </LinearLayout>

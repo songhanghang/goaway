@@ -16,9 +16,8 @@
 
 package com.mi.song.goaway.adapter;
 
-import android.app.usage.UsageStats;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +32,7 @@ import com.mi.song.goaway.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * https://github.com/googlesamples/android-AppUsageStatistics/blob/master/Application/src/main/java/com/example/android/appusagestatistics/CustomUsageStats.java
@@ -41,54 +41,46 @@ import java.util.List;
 public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.ViewHolder> {
 
     private List<MyUsageStats> mCustomUsageStatsList = new ArrayList<>();
-    private Context context;
+    private Context mContext;
+    private int[] mColors;
 
     public UsageListAdapter(Context context) {
-        this.context = context;
+        this.mContext = context;
+        this.mColors = TimeUtil.getColorArray(context);
     }
 
     /**
      * Provide a reference to the type of views that you are using (custom ViewHolder)
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private final CardView mCardView;
         private final TextView mPackageName;
         private final TextView mUsageInfo;
         private final ImageView mAppIcon;
 
-        public ViewHolder(View v) {
+        private ViewHolder(View v) {
             super(v);
-            mPackageName = (TextView) v.findViewById(R.id.package_text);
-            mUsageInfo = (TextView) v.findViewById(R.id.usage_text);
-            mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
-        }
-
-        public TextView getLastTimeUsed() {
-            return mUsageInfo;
-        }
-
-        public TextView getPackageName() {
-            return mPackageName;
-        }
-
-        public ImageView getAppIcon() {
-            return mAppIcon;
+            mCardView = v.findViewById(R.id.cardview);
+            mPackageName = v.findViewById(R.id.package_text);
+            mUsageInfo = v.findViewById(R.id.usage_text);
+            mAppIcon = v.findViewById(R.id.app_icon);
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.usage_card, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.usage_card, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getPackageName().setText( AppsUtil.getAppName(context,
-                mCustomUsageStatsList.get(position).usageStats.getPackageName()));
-        String time = TimeUtil.timeToString(mCustomUsageStatsList.get(position).usageStats.getTotalTimeInForeground());
-        viewHolder.getLastTimeUsed().setText(time);
-        viewHolder.getAppIcon().setImageDrawable(mCustomUsageStatsList.get(position).appIcon);
+        MyUsageStats myUsageStats = mCustomUsageStatsList.get(position);
+        viewHolder.mCardView.setCardBackgroundColor(mColors[new Random().nextInt(5)]);
+        viewHolder.mPackageName.setText(AppsUtil.getAppName(mContext, myUsageStats.usageStats.getPackageName()));
+        String time = TimeUtil.timeToString(myUsageStats.usageStats.getTotalTimeInForeground());
+        viewHolder.mUsageInfo.setText(time);
+        viewHolder.mAppIcon.setImageDrawable(myUsageStats.appIcon);
     }
 
     @Override

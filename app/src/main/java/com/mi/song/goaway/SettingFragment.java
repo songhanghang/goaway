@@ -26,11 +26,11 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     public static final String PRE_KEY_COLOR3 = "pref_key_color3";
     public static final String PRE_KEY_COLOR4 = "pref_key_color4";
 
-    public static final int BLUE = 0XFF4A7FEB;
-    public static final int GREEN = 0XFF46BF7F;
-    public static final int ORGANE = 0XFFFF8746;
-    public static final int LIGHT_RED = 0XFFFF6243;
-    public static final int RED = 0xFFFF0000;
+    public static final int DEFAULT_COLOR_0 = -11894805;
+    public static final int DEFAULT_COLOR_1 = -12759625;
+    public static final int DEFAULT_COLOR_2 = -10079303;
+    public static final int DEFAULT_COLOR_3 = -43771;
+    public static final int DEFAULT_COLOR_4 = -638932;
 
     EditTextPreference editText0;
     EditTextPreference editText1;
@@ -103,10 +103,10 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     }
 
     private void setColor(SharedPreferences sharedPreferences) {
-        colorPicker0.setColor(sharedPreferences.getInt(PRE_KEY_COLOR0, BLUE));
-        colorPicker1.setColor(sharedPreferences.getInt(PRE_KEY_COLOR1, GREEN));
-        colorPicker2.setColor(sharedPreferences.getInt(PRE_KEY_COLOR2, ORGANE));
-        colorPicker3.setColor(sharedPreferences.getInt(PRE_KEY_COLOR3, LIGHT_RED));
-        colorPicker4.setColor(sharedPreferences.getInt(PRE_KEY_COLOR4, RED));
+        colorPicker0.setColor(sharedPreferences.getInt(PRE_KEY_COLOR0, DEFAULT_COLOR_0));
+        colorPicker1.setColor(sharedPreferences.getInt(PRE_KEY_COLOR1, DEFAULT_COLOR_1));
+        colorPicker2.setColor(sharedPreferences.getInt(PRE_KEY_COLOR2, DEFAULT_COLOR_2));
+        colorPicker3.setColor(sharedPreferences.getInt(PRE_KEY_COLOR3, DEFAULT_COLOR_3));
+        colorPicker4.setColor(sharedPreferences.getInt(PRE_KEY_COLOR4, DEFAULT_COLOR_4));
     }
 }
