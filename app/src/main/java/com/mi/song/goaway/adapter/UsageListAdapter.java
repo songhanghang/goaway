@@ -41,6 +41,7 @@ import java.util.Random;
 public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.ViewHolder> {
 
     private List<MyUsageStats> mCustomUsageStatsList = new ArrayList<>();
+    private Random mRandom = new Random();
     private Context mContext;
     private int[] mColors;
 
@@ -76,7 +77,7 @@ public class UsageListAdapter extends RecyclerView.Adapter<UsageListAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         MyUsageStats myUsageStats = mCustomUsageStatsList.get(position);
-        viewHolder.mCardView.setCardBackgroundColor(mColors[new Random().nextInt(5)]);
+        viewHolder.mCardView.setCardBackgroundColor(mColors[mRandom.nextInt(5)]);
         viewHolder.mPackageName.setText(AppsUtil.getAppName(mContext, myUsageStats.usageStats.getPackageName()));
         String time = TimeUtil.timeToString(myUsageStats.usageStats.getTotalTimeInForeground());
         viewHolder.mUsageInfo.setText(time);

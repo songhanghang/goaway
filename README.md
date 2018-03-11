@@ -27,6 +27,12 @@
 
 # 2.0 更新说明
 
+  * 20180311 version 3
+
+ 1. 全新首页
+ 2. 更新默认颜色及文案
+ 3. 支持全部app的使用排名展示
+
   * 20180305 version 2
 
  1. 支持自定义提示及显示位置
@@ -41,7 +47,7 @@
 
 # 开源声明
 [github: https://github.com/songhanghang/goaway ](https://github.com/songhanghang/goaway)
-
+感谢[LeeReindeer同学贡献](https://github.com/LeeReindeer)
 该app无任何恶意行为，代码在此开源，欢迎监督。
 如有二次开发，望加上出处，不胜感谢！
 
@@ -73,3 +79,4 @@
  邮箱: 1131442853@qq.com
 
 [github: https://github.com/songhanghang](https://github.com/songhanghang)
+[LeeReindeer: https://github.com/LeeReindeer](https://github.com/LeeReindeer)

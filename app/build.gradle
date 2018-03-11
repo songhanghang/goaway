@@ -7,7 +7,7 @@ android {
         applicationId "com.mi.song.goaway"
         minSdkVersion 21
         targetSdkVersion 27
-        versionCode 2
+        versionCode 3
         versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -17,12 +17,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation "com.android.support:design:27.1.0"
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.github.didikee:AndroidDonate:0.1.0'
     implementation 'com.takisoft.fix:preference-v7:27.1.0.0'
