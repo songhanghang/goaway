@@ -18,7 +18,7 @@
 
 # 2.0 下载 
 
- [点这Download](https://www.pgyer.com/dIUF)
+ [点这Download https://www.coolapk.com/apk/226765](https://www.coolapk.com/apk/226765)
 
 # 注意事项
  
