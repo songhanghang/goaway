@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mi.song.goaway">
+    package="com.mi.song.time">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
 
     <application
@@ -23,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTheme">
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.mi.song.time.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".GoAwayWallpaperService"
+        <service android:name="com.mi.song.time.GoAwayWallpaperService"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -41,10 +29,6 @@
                 android:name="android.service.wallpaper"
                 android:resource="@xml/wallpaper"/>
         </service>
-
-        <meta-data
-            android:name="BaiduMobAd_STAT_ID"
-            android:value="dcd2388ae0" />
 
     </application>
 

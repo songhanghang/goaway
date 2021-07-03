@@ -1,4 +1,4 @@
-package com.mi.song.goaway.util;
+package com.mi.song.time.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,8 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.mi.song.goaway.R;
-import com.mi.song.goaway.SettingFragment;
+import com.mi.song.time.R;
 
 /**
  * @author by songhang on 2018/3/2
@@ -32,15 +31,6 @@ public class ScreenUtil {
         }
         calcRealScreenSize(context);
         return sWidth;
-    }
-
-    /**
-     * Tips bottom distance
-     */
-    public static int getTipsBottom(Context context) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        String height = sp.getString(SettingFragment.PRE_KEY_BOTTOM, context.getString(R.string.bottom_distance));
-        return Integer.valueOf(height);
     }
 
     private static void calcRealScreenSize(Context context) {

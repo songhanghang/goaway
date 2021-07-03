@@ -1,4 +1,4 @@
-package com.mi.song.goaway.bean;
+package com.mi.song.time.bean;
 
 import android.app.usage.UsageStats;
 import android.graphics.drawable.Drawable;

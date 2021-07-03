@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">goaway</string>
+    <string name="app_name">快手时长</string>
     <string name="button_settings_wallpaper">SET WALLPAPER</string>
     <string name="button_usage">USAGE INFO</string>
     <string name="button_update">README</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">goaway</string>
+    <string name="app_name">快手时长</string>
     <string name="button_settings_wallpaper">设置壁纸</string>
     <string name="button_usage">App排名</string>
     <string name="button_donate">打赏</string>
@@ -15,6 +15,6 @@
     <string name="menu_setting">设置</string>
     <string name="colors_title">颜色</string>
     <string name="colors_summary">颜色随着你使用手机的时间而变化</string>
-    <string name="try_press">长按试试...</string>
+    <string name="try_press">长按屏幕开启快手授权</string>
 
 </resources>

@@ -1,63 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:background="@android:color/black">
+
+  <TextView
+    android:id="@+id/info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:background="@android:color/black">
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:lineSpacingExtra="5dp"
+    android:text="快手使用时长监控"
+    android:textColor="@android:color/white"
+    android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:gravity="center"
-        android:text="@string/app_info"
-        android:textSize="16sp"
-        android:lineSpacingExtra="5dp"
-        android:textColor="@android:color/white"
-        />
+  <Button
+    android:id="@+id/use_btn"
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:layout_gravity="bottom"
+    android:layout_marginBottom="13dp"
+    android:layout_marginEnd="13dp"
+    android:layout_marginStart="13dp"
+    android:text="先授权后使用"
+    android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/pay_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorAccent"
-        android:text="@string/button_donate"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"/>
-
-    <Button
-        android:id="@+id/note_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:text="@string/button_update"
-        android:textSize="24sp"/>
-
-    <Button
-        android:id="@+id/usage_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorAccent"
-        android:text="@string/button_usage"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        android:textAllCaps="false"
-        />
-
-    <Button
-        android:id="@+id/use_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@color/colorPrimary"
-        android:text="@string/button_settings_wallpaper"
-        android:textColor="@android:color/white"
-        android:textSize="24sp"
-        />
-
-</LinearLayout>
+</FrameLayout>
