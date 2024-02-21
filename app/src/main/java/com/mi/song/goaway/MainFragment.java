@@ -102,17 +102,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     }
 
     private void use() {
-        try {
+//        try {
             Intent intent = new Intent();
-            intent.setAction(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-            intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT
-                    , new ComponentName(getActivity().getPackageName()
-                            , GoAwayWallpaperService.class.getCanonicalName()));
-
-            startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
+            intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(getActivity(), GoAwayWallpaperService.class));
+            startActivityForResult(intent, 100);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void usage() {

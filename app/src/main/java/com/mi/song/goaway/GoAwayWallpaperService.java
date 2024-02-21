@@ -1,6 +1,5 @@
 package com.mi.song.goaway;
 
-import android.app.usage.UsageStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +16,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
-import com.mi.song.goaway.adapter.UsageListAdapter;
 import com.mi.song.goaway.util.AppsUtil;
 import com.mi.song.goaway.util.ScreenUtil;
 import com.mi.song.goaway.util.TimeUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author by songhang on 2018/2/21
@@ -31,7 +26,7 @@ import java.util.List;
 
 public class GoAwayWallpaperService extends WallpaperService {
     private static final String TAG = "goaway";
-    private static final long TRIGGER_PRESS_DELAY_MILLIS = 1300;
+    private static final long TRIGGER_PRESS_DELAY_MILLIS = 300;
     private static final int DITHER_OFFSET = 300;
 
     // The time you used phone
@@ -107,6 +102,7 @@ public class GoAwayWallpaperService extends WallpaperService {
         @Override
         public void onCreate(SurfaceHolder surfaceHolder) {
             super.onCreate(surfaceHolder);
+            Log.i("songhang", "onCreate Service");
 
             guideTextPaint = new Paint();
             guideTextPaint.setColor(Color.WHITE);
@@ -117,7 +113,7 @@ public class GoAwayWallpaperService extends WallpaperService {
 
             tipsTextPaint = new Paint();
             tipsTextPaint.setColor(Color.WHITE);
-            tipsTextPaint.setTextSize(24);
+            tipsTextPaint.setTextSize(36);
             tipsTextPaint.setTextAlign(Paint.Align.CENTER);
             tipsTextPaint.setAntiAlias(true);
             tipsTextPaint.setDither(true);

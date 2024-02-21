@@ -7,7 +7,7 @@
 
     <string name="used_hint">Used</string>
     <string name="bottom_distance_title">Bottom distance</string>
-    <string name="bottom_distance" translatable="false">24</string>
+    <string name="bottom_distance" translatable="false">48</string>
 
     <string name="tips_title">Tips</string>
     <string name="tip1_title">Tip1</string>

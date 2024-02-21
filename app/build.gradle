@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion = '27.0.1'
+    compileSdkVersion 33
+    buildToolsVersion = '32.0.0'
     defaultConfig {
         applicationId "com.mi.song.goaway"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 33
         versionCode 3
         versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
